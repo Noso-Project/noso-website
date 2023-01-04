@@ -113,7 +113,7 @@
 	                    }
 	                }
 	                async function updateData() {
-	                  let response = await fetch('http://nosostats.ddns.net:49001/api/popwGlobe');
+	                  let response = await fetch('https://nosostats.com:49443/api/popwGlobe');
 	                  let data = await response.json();
 	                  bubbleSeries.data.setAll(data);
 	                }
