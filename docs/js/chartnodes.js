@@ -92,7 +92,7 @@ am5.ready(function() {
             }
         }
         async function updateData() {
-          let response = await fetch('https://nosostats.com:49443/api/nodeListS');
+          let response = await fetch('https://nosostats2.nosofish.xyz:49443/api/globeMnData');
           let data = await response.json();
           bubbleSeries.data.setAll(data);
     	}
