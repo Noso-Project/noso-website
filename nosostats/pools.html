@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+      <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+      <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+      <script src="https://cdn.amcharts.com/lib/5/map.js"></script>
+      <script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script>
+      <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+      <script src="https://cdn.amcharts.com/lib/5/radar.js"></script>
+      <link rel="shortcut icon" type="image/x-icon" href="noso190X190.png" />
+      <script type="text/javascript" src="main.js"></script>
+      <meta charset="UTF-8">
+
+      </style>
+      <title>NOSO Mining</title>
+      <link rel="stylesheet" href="nodes.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"
+      
+        integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw=="
+        crossorigin="anonymous"></script>
+
+    </head>
+     <body>
+      <marquee></marquee>
+        
+          <div class="header">
+            
+            <div class="headerElement">
+                <div id="chartLabel"></div>
+                <div id ='ss'>
+                  <canvas id="networkStats"></canvas>
+                </div>
+            </div>
+  
+            <div class="headerElement">
+                <div id="chartLabel">Mn's</div>
+                <div id ='ss'>
+                  <canvas id="blockTime"></canvas>
+                </div>
+            </div>
+  
+            <div class="headerElement">
+                <div  id="chartLabel">Orders per Block</div>
+                  <div id ='ss'>
+                <canvas id="mini"></canvas>
+              </div>
+            </div>
+  
+            <div class="headerElement">
+                <div id="chartLabel">Amounts per block</div>
+                  <div id ='ss'>
+                <canvas id="mid"></canvas>
+              </div>
+            </div>
+  
+            <div class="headerElement">
+                <div id="chartLabel">Pending Orders</div>
+                <div id="big"></div>
+            </div>
+        </div>
+
+      <div class="mainPart">
+          <div class="menu">
+            <div id='newCounter'></div>
+            <button type="button" id="explorer" onclick="explorer()">NOSO Chain</button>
+            <button type="button" id="nodes" onclick="nodes()">Active Nodes</button>
+            <button type="button" id="explorer1" onclick="explorer1()">Explorer <br> (Under constuction)</button>
+            <button type="button" id="pools" onclick="pools()">PoPW <br> Participation</button>
+            <button type="button" id="CandA" onclick="CandA()">Coins & Addresses</button>
+            <div id ='menuCharts'>
+              <canvas id="distributionCanvas"></canvas>
+            </div>
+            <div id ='menuCharts'>
+              <canvas id="clientCanvas"></canvas>
+            </div>
+            <div id ='menuCharts'>
+              <canvas id="solCanvas"></canvas>
+              </div>
+          </div>
+              <div class="result">
+
+                <div class="poolChartsM">
+                    <div id="poolChart_4">
+                      <canvas id="poolChart11"></canvas>
+                    </div>
+                    <div id="poolChart_4">
+                      <canvas id="poolChart12"></canvas>
+                    </div>
+                    <div id="poolChart_4">
+                      <canvas id="poolChart13"></canvas>
+                    </div>
+                </div>
+                <div class="poolChartsM">
+                  <div id="poolChart_0">
+                    <canvas id="poolChart21"></canvas>
+                  </div>
+              </div>
+              </div>
+          </div>
+          
+
+        <script>
+            sessionStorage.setItem("state", 'pools')
+            console.log('state inside pools :' , sessionStorage.state)
+            if (sessionStorage.state === 'pools'){
+              refreshPools() ;
+              //chart1 ()
+              //chart2 ()
+              document.getElementById("pools").style.backgroundColor = "RGBA(96, 125, 139)";
+              sessionStorage.setItem("state", 'pools')
+            } else {
+              console.log ('result ---> refresh')
+              document.getElementById("pools").style.backgroundColor = "RGBA(96, 125, 139)";
+              sessionStorage.setItem("state", 'pools');
+              refreshPools() ;  
+            }
+            async function refreshPools(){ 
+              //if (sessionStorage.getItem('lastTimeInHistory') === null) {
+                
+              //} else{
+                //chart1 ()
+                //chart2 ()
+              //}
+              
+              console.log('state inside refresh :' , sessionStorage.state)
+              dayMinerArray = []
+              dayBlocksArray = []
+              dayPercentagesArray = []
+              
+              weekMinerArray = []
+              weekBlocksArray = []
+              weekPercentagesArray = []
+
+              monthMinerArray = []
+              monthBlocksArray = []
+              monthPercentagesArray = []
+
+              let response2 = await fetch(sessionStorage.apiServer + 'last24HoursCreators');
+              let data2 = await response2.json();
+              console.log(data2)
+              console.log(data2['Day'])
+              data2[2]['data'].forEach(row=> {
+                let miner = row ['miner']
+                dayMinerArray.push(miner);
+                let blocks = row['blocksWon'];
+                dayBlocksArray.push(blocks);
+                let percentage = row['percentage'];
+                dayPercentagesArray.push(percentage);
+              })
+              data2[1]['data'].forEach(row=> {
+                let miner = row ['miner']
+                weekMinerArray.push(miner);
+                let blocks = row['blocksWon'];
+                weekBlocksArray.push(blocks);
+                let percentage = row['percentage'];
+                weekPercentagesArray.push(percentage);
+              })
+              data2[0]['data'].forEach(row=> {
+                let miner = row ['miner']
+                monthMinerArray.push(miner);
+                let blocks = row['blocksWon'];
+                monthBlocksArray.push(blocks);
+                let percentage = row['percentage'];
+                monthPercentagesArray.push(percentage);
+              })
+              poolsPersentage(
+                  dayMinerArray , dayPercentagesArray ,
+                  weekMinerArray , weekPercentagesArray ,
+                  monthMinerArray , monthPercentagesArray 
+                )
+              poolsBlocks(
+                  dayMinerArray , dayBlocksArray  ,
+                  weekMinerArray , weekBlocksArray  ,
+                  monthMinerArray , monthBlocksArray  
+                )
+
+              let response4 = await fetch(sessionStorage.apiServer + 'blockRangeMinersHash/24');
+              let data4 = await response4.json();
+              let hashBlocks = data4['blocks']
+              let hashData = data4['data']
+              let hashMiners = data4['miners']
+              let top1MinerInPeriod = data4['top1MinerInPeriod']
+              let FinalData = []
+
+              var colors = [ '#2685CB', '#4AD95A', '#FEC81B', '#FD8D14', '#CE00E6', '#4B4AD3', '#FC3026', '#B8CCE3', '#6ADC88', '#4EE45F' ,
+                              '#3685CB', '#5AD95A', '#6EC81B', '#7D8D14', '#8E00E6', '#9B4A53', '#1C3086', '#281CE3', '#92DC88', '#7E345F',
+                              '#26851B', '#4AD92A', '#FEC83B', '#FD8D44', '#CE0056', '#4B4A63', '#FC3076', '#B8CC83', '#6ADC98', '#FEE4AF' ,
+                              '#2685CB', '#4AD95A', '#FEC81B', '#FD8D14', '#CE00E6', '#4B4AD3', '#FC3026', '#B8CCE3', '#6ADC88', '#FEE45F'  ]
+              for (var i=0; i<hashData.length; i++) {
+                dataSetData = {}
+                  if (hashMiners[i] === top1MinerInPeriod ){
+                      flag = true
+                      bw = 4
+                      bc = 'red'
+                  } else {
+                    flag = false 
+                    bw = 2
+                    bc = colors[i]
+                  }
+                  if (hashMiners[i] === 'GoneFishing' ){
+                      flag = false
+                      bw = 4
+                      bc = 'blue'
+                  } 
+                  dataSetData = {
+                      label:hashMiners[i],
+                      data: hashData[i],
+                      //backgroundColor: colors[i],
+                      pointHoverRadius: 7,
+                      borderColor:bc,
+                      fill: flag,
+                      hoverBorderColor: colors[1],
+                      hoverBackgroundColor: colors[i],
+                      borderStyle: 'solid',
+                      borderWidth: bw,
+                      hoverBorderWidth: 2,
+                  }
+                FinalData.push(dataSetData)
+              }
+
+              minersHashOverTime (hashBlocks , hashMiners , FinalData)
+              //-------------------------------------------------------------------------
+              topMinerArray = []
+              topMInerBlocksArray = []
+              topMInerPercentageArray = []
+              let response3 = await fetch(sessionStorage.apiServer + 'allCreators');
+              let data3 = await response3.json();
+              data3.forEach(row => {
+                let topMinerAddress = row['miner'];
+                topMinerArray.push(topMinerAddress);
+                let topMInerBlocks = row['blocksWon'];
+                topMInerBlocksArray.push(topMInerBlocks);
+                let topMInerPercentage = row['percentage'];
+                topMInerPercentageArray.push(topMInerPercentage);
+                document.getElementById("pools").style.backgroundColor = "RGBA(96, 125, 139)";
+              })
+              //---------------------------------------------------------------------------
+              topMiners (topMinerArray , topMInerBlocksArray , topMInerPercentageArray)
+              //-------------------------------------------------------------------------------------------------------
+              function networkHash (timeArray , totalNetArray , pool1HArray , pool2HArray , pool3HArray ,
+              pool4HArray , pool1MArray , pool2MArray , pool3MArray , pool4MArray) {
+                //console.log(blockArray , miniArray)
+                var ctx = document.getElementById('poolChart1').getContext("2d");
+                if (window.mypoolChart1 != undefined)
+                  window.mypoolChart1.destroy();
+                    window.mypoolChart1 = new Chart(ctx, {
+                          type: 'line',
+                          data: {
+                            labels: timeArray,
+                            datasets: [
+                              {fill: false,
+                                data: totalNetArray ,
+                                pointRadius: 0,
+                                label: 'Network',
+                                //backgroundColor: 'RGBA(198,87,53,1)',
+                                borderColor: 'RGBA(0,0,200,1)',
+                                borderWidth: 1
+                                },
+                              {fill: false,
+                                data: pool1HArray ,
+                                pointRadius: 0,
+                                label: 'GoneFishing',
+                                //backgroundColor: 'RGBA(198,87,153,.4)',
+                                borderColor: 'RGBA(0,200,0,1)',
+                                borderWidth: 1
+                                },
+                              {fill: false,
+                                data: pool2HArray ,
+                                pointRadius: 0,
+                                label: 'Rukzuk',
+                                //backgroundColor: 'RGBA(198,87,53,.4)',
+                                borderColor: 'RGBA(200,0,0,1)',
+                                borderWidth: 1
+                                },
+                              {fill: false,
+                                data: pool3HArray ,
+                                pointRadius: 0,
+                                label: 'F04ever',
+                                //backgroundColor: 'RGBA(198,87,53,.4)',
+                                borderColor: 'RGBA(60,60,60,1)',
+                                borderWidth: 1
+                                },
+                              {fill: false,
+                                data: pool4HArray ,
+                                pointRadius: 0,
+                                label: 'Vanthoi',
+                                //backgroundColor: 'RGBA(198,137,53,.4)',
+                                borderColor: 'RGBA(213,66,193,1)',
+                                borderWidth: 1
+                                },
+                            ]
+                          },
+                          options: {
+                            tooltips: {
+                                       mode: 'nearest',
+                                       intersect: false,
+                                       callbacks: {
+                                          label: function(tooltipItems, data) {
+                                              return  tooltipItems.yLabel.toString() + 'Mhs';
+                                          }
+                                        }
+                                      },
+                              hover: {
+                                 mode: 'nearest',
+                                 intersect: false
+                                },
+                            title: {
+                                display: true,
+                                text: 'Total-Pools Hashrates'
+                                },
+                            animations: {
+                              tension: {
+                                duration: 1000,
+                                easing: 'linear',
+                                from: 1,
+                                to: 0,
+                                loop: true
+                              }
+                            },
+                            label: "My Chart",
+                            responsive: true,
+                            interaction: {
+                              mode: 'index',
+                              intersect: false,
+                            },
+                            stacked: true,
+                              interaction: {
+                                mode: 'index',
+                                intersect: false,
+                              },
+                              plugins: {
+                                title: {
+                                display: true,
+                                text: 'Total-Pools Hashrates'
+                                },
+                                tooltip: {
+                                  yAlign: 'center'
+                                },
+                                callbacks: {
+                                }
+                              },
+                            layout: {
+                              padding: {
+                                top: 5 ,
+                                right: 10
+                              }
+                            },
+                            maintainAspectRatio: false,
+                            scales: {
+                                      xAxes: [{
+                                        display : true,
+                                          ticks: {
+                                          display : true,
+                                            fontSize: 12
+                                            }
+                                        }],
+                                      yAxes: [{
+                                              display : true,
+                                              type: 'logarithmic',
+                                              position: 'left',
+                                              ticks: {
+                                                min: 1,
+                                                  max: 500,
+                                                  callback: function (value, index, values) {
+                                                      //if (value === 1000000) return "1M";
+                                                      //if (value === 100000) return "100K";
+                                                      //if (value === 10000) return "10K";
+                                                      //if (value === 1000) return "1K";
+                                                      if (value === 200) return "200 Mhs";
+                                                      if (value === 100) return "100Mhs";
+                                                      if (value === 10) return "10Mhs";
+                                                      if (value === 1) return "1Mhs";
+                                                      return null;
+                                                  },
+                                                display : true,
+                                                fontSize: 12,
+                                                //stepSize : 1,
+                                            }
+                                        }],
+                              },
+                              legend: {
+                                position: 'top',
+                                  display: true,
+                                },
+                              elements: {
+                                point:{
+                                  radius: 0
+                                }
+                              },
+                                animation: {
+                                  duration:2000,
+                              },
+                            }
+                      });
+              }
+              //-------------------------------------------------------------------------------------------------------
+              function miners (timeArray  , pool1MArray , pool2MArray , pool3MArray , pool4MArray) {
+                var ctx = document.getElementById('poolChart2').getContext("2d");
+                if (window.mypoolChart2 != undefined)
+                  window.mypoolChart2.destroy();
+                    window.mypoolChart2 = new Chart(ctx, {
+                          type: 'line',
+                          data: {
+                            labels: timeArray,
+                            datasets: [
+                              {fill: false,
+                                data: pool1MArray ,
+                                pointRadius: 0,
+                                label: 'GoneFishing',
+                                borderColor: 'RGBA(0,200,0,1)',
+                                borderWidth: 1
+                                },
+                              {fill: false,
+                                data: pool2MArray ,
+                                pointRadius: 0,
+                                label: 'Rukzuk',
+                                //backgroundColor: 'RGBA(198,87,153,.4)',
+                                borderColor: 'RGBA(200,0,0,1)',
+                                borderWidth: 1
+                                },
+                              {fill: false,
+                                data: pool3MArray ,
+                                pointRadius: 0,
+                                label: 'F04ever',
+                                //backgroundColor: 'RGBA(198,87,53,.4)',
+                                borderColor: 'RGBA(60,60,60,1)',
+                                borderWidth: 1
+                                },
+                              {fill: false,
+                                data: pool4MArray ,
+                                pointRadius: 0,
+                                label: 'Vanthoi',
+                                //backgroundColor: 'RGBA(198,87,53,.4)',
+                                borderColor: 'RGBA(213,66,193,1)',
+                                borderWidth: 1
+                                },
+                            ]
+                          },
+                          options: {
+                            tooltips: {
+                                       mode: 'nearest',
+                                       intersect: false,
+                                       callbacks: {
+                                          label: function(tooltipItems, data) {
+                                              return  tooltipItems.yLabel.toString() + 'Miner(s)';
+                                          }
+                                        }
+                                      },
+                              hover: {
+                                 mode: 'nearest',
+                                 intersect: false
+                                },
+                            title: {
+                                display: true,
+                                text: 'Miners on Pools'
+                                },
+                            animations: {
+                              tension: {
+                                duration: 1000,
+                                easing: 'linear',
+                                from: 1,
+                                to: 0,
+                                loop: true
+                              }
+                            },
+                            label: "My Chart",
+                            responsive: true,
+                            interaction: {
+                              mode: 'index',
+                              intersect: false,
+                            },
+                            stacked: true,
+                              interaction: {
+                                mode: 'index',
+                                intersect: false,
+                              },
+                              plugins: {
+                                tooltip: {
+                                  yAlign: 'center'
+                                },
+                              },
+                            layout: {
+                              padding: {
+                                top: 5 ,
+                                right: 10
+                              }
+                            },
+                            maintainAspectRatio: false,
+                            scales: {
+                                      xAxes: [{
+                                        display : true,
+                                          ticks: {
+                                          display : true,
+                                            fontSize: 12
+                                            }
+                                        }],
+                                      yAxes: [{
+                                              display : true,
+                                              type: 'linear',
+                                              position: 'left',
+                                              ticks: {
+                                                callback: value => value + ' Miner(s)',
+                                                display : true,
+                                                fontSize: 12,
+                                                //stepSize : 1,
+                                            }
+                                        }],
+                              },
+                              legend: {
+                                position: 'top',
+                                  display: true,
+                                },
+                              elements: {
+                                point:{
+                                  radius: 0
+                                }
+                              },
+                                animation: {
+                                  duration:2000,
+                              },
+                            }
+                      });
+              }
+              //-------------------------------------------------------------------------------------------------------
+              function poolsPersentage(dayMinerArray  , dayPercentagesArray ,
+                  weekMinerArray , weekPercentagesArray ,
+                  monthMinerArray ,monthPercentagesArray ) {
+                      let colorSet = [
+                              'rgb(21, 67, 96)','rgb(23, 165, 137)','rgb(120, 66, 18)','rgb(218, 117, 166)',
+                                        'rgb(255, 195, 110)','rgb(255, 87, 51)','rgb(100, 30, 22)',
+                                        'rgb(220, 166, 18)','rgb(125, 102, 8)','rgb(195, 155, 211)',
+                                        'rgb(202, 111, 30)','rgb(250, 115, 60)','rgb(118, 215, 196)',
+                                        'rgb(195, 155, 211)','rgb(230, 176, 170)','rgb(21, 167, 96)',
+                                        'rgb(23, 165, 37)','rgb(220, 166, 18)','rgb(255, 87, 51)',
+                                        'rgb(250, 215, 160)','rgb(218, 247, 166)','rgb(155, 89, 182)',
+                        ];
+                      var ctx = document.getElementById('poolChart11').getContext("2d");
+                      if (window.mypoolChart11 != undefined)
+                        window.mypoolChart11.destroy();
+                          window.mypoolChart11 = new Chart(ctx, {
+                                type: 'doughnut',
+                                data: {
+                                  labels: dayMinerArray,
+                                  cutout : '30%',
+                                  datasets: [
+                                    {fill: true,
+                                      label:'Day' ,
+                                      //labels: dayMinerArray,
+                                      data: dayPercentagesArray ,
+                                      pointRadius: 2,
+                                      backgroundColor:colorSet ,
+                                      borderColor: 'RGBA(255,255,255,.5)',
+                                      borderWidth: 3
+                                      },
+                                  ]
+                                },
+                                options: {
+                                    tooltips: {
+                                       mode: 'nearest',
+                                       intersect: false
+                                      },
+                                    hover: {
+                                       mode: 'nearest',
+                                       intersect: false
+                                      },
+                                    title: {
+                                        display: true,
+                                        text: 'Creators(percentage) Last 24 hours ' // Inner/Month-Middle/Week-Outer/Day'
+                                      },
+                                    animations: {
+                                      tension: {
+                                          duration: 1000,
+                                          easing: 'linear',
+                                          from: 1,
+                                          to: 0,
+                                          loop: true
+                                        }
+                                      },
+                                    label: "My Chart",
+                                    responsive: true,
+                                    interaction: {
+                                        mode: 'index',
+                                        intersect: false,
+                                      },
+                                    stacked: true,
+                                    interaction: {
+                                        mode: 'index',
+                                        intersect: false,
+                                      },
+                                    layout: {
+                                        padding: {
+                                          top: 5 ,
+                                          right: 10
+                                        }
+                                      },
+                                    maintainAspectRatio: false,
+                                    scales: {
+                                              xAxes: [{
+                                                display :false,
+                                                  ticks: {
+                                                  display :false,
+                                                    fontSize: 12
+                                                    }
+                                                }],
+                                              yAxes: [{
+                                                      display :false,
+                                                      type: 'linear',
+                                                      position: 'left',
+                                                      ticks: {
+                                                        display :false,
+                                                        fontSize: 12,
+                                                        }
+                                                }],
+                                      },
+                                    legend: {
+                                      position: 'left',
+                                        display: true,
+                                      },
+                                    elements: {
+                                        point:{
+                                          radius: 0
+                                        }
+                                      },
+                                    animation: {
+                                      duration:1000,
+                                      }
+                                  }
+                            });
+                 }
+              //-------------------------------------------------------------------------------------------------------
+              function poolsBlocks( dayMinerArray , dayBlocksArray  ,
+                  weekMinerArray , weekBlocksArray  ,
+                  monthMinerArray , monthBlocksArray   ) {
+                    let colorSet = [
+                              'rgb(21, 67, 96)','rgb(23, 165, 137)','rgb(120, 66, 18)','rgb(218, 117, 166)',
+                                        'rgb(255, 195, 110)','rgb(255, 87, 51)','rgb(100, 30, 22)',
+                                        'rgb(220, 166, 18)','rgb(125, 102, 8)','rgb(195, 155, 211)',
+                                        'rgb(202, 111, 30)','rgb(250, 115, 60)','rgb(118, 215, 196)',
+                                        'rgb(195, 155, 211)','rgb(230, 176, 170)','rgb(21, 167, 96)',
+                                        'rgb(23, 165, 37)','rgb(220, 166, 18)','rgb(255, 87, 51)',
+                                        'rgb(250, 215, 160)','rgb(218, 247, 166)','rgb(155, 89, 182)',
+                        ];
+                      var ctx = document.getElementById('poolChart12').getContext("2d");
+                      if (window.mypoolChart12 != undefined)
+                        window.mypoolChart12.destroy();
+                          window.mypoolChart12 = new Chart(ctx, {
+                                type: 'doughnut',
+                                data: {
+                                  labels: dayMinerArray,
+                                  datasets: [
+                                    {fill: true,
+                                      //labels: dayMinerArray,
+                                      data: dayBlocksArray ,
+                                      pointRadius: 2,
+                                      backgroundColor:colorSet ,
+                                      borderColor: 'RGBA(255,255,255,.5)',
+                                      borderWidth: 3
+                                      },
+                                  ]
+                                },
+                                options: {
+                                    tooltips: {
+                                       mode: 'nearest',
+                                       intersect: false
+                                      },
+                                    hover: {
+                                       mode: 'nearest',
+                                       intersect: false
+                                      },
+                                    title: {
+                                        display: true,
+                                        text: 'Creators(Block(s)) Last 24 hours' //Inner/Month-Middle/Week-Outer/Day'
+                                      },
+                                    animations: {
+                                      tension: {
+                                          duration: 1000,
+                                          easing: 'linear',
+                                          from: 1,
+                                          to: 0,
+                                          loop: true
+                                        }
+                                      },
+                                    label: "My Chart",
+                                    responsive: true,
+                                    interaction: {
+                                        mode: 'index',
+                                        intersect: false,
+                                      },
+                                    stacked: true,
+                                    interaction: {
+                                        mode: 'index',
+                                        intersect: false,
+                                      },
+                                    layout: {
+                                        padding: {
+                                          top: 5 ,
+                                          right: 10
+                                        }
+                                      },
+                                    maintainAspectRatio: false,
+                                    scales: {
+                                              xAxes: [{
+                                                display :false,
+                                                  ticks: {
+                                                  display :false,
+                                                    fontSize: 12
+                                                    }
+                                                }],
+                                              yAxes: [{
+                                                      display :false,
+                                                      type: 'linear',
+                                                      position: 'left',
+                                                      ticks: {
+                                                        display :false,
+                                                        fontSize: 12,
+                                                        }
+                                                }],
+                                      },
+                                    legend: {
+                                      position: 'left',
+                                        display: true,
+                                      },
+                                    elements: {
+                                        point:{
+                                          radius: 0
+                                        }
+                                      },
+                                    animation: {
+                                      duration:1000,
+                                      }
+                                  }
+                            });
+                 }
+              //-------------------------------------------------------------------------------------------------------
+              function topMiners(topMinerArray , topMInerBlocksArray , topMInerPercentageArray) {
+                //console.log(addressWonsArray)
+                var ctx = document.getElementById('poolChart13').getContext("2d");
+                if (window.mypoolChart13 != undefined)
+                  window.mypoolChart13.destroy();
+                    window.mypoolChart13 = new Chart(ctx, {
+                          type: 'doughnut',
+                          //type: 'bar',
+                          data: {
+                            labels: topMinerArray,
+                            datasets: [
+                              {fill: true,
+                                data: topMInerBlocksArray ,
+                                pointRadius: 2,
+                                //labels: dayMinerArray,
+                                backgroundColor: [
+                                'rgb(202, 111, 30)',
+                                'rgb(23, 165, 37)',
+                                  'rgb(21, 67, 96)',
+                                  'rgb(23, 165, 137)',
+                                  'rgb(120, 66, 18)',
+                                  'rgb(218, 247, 166)',
+                                  'rgb(255, 195, 0))',
+                                  'rgb(255, 87, 51)',
+                                  'rgb(100, 30, 22)',
+                                  'rgb(125, 102, 8)',
+                                  'rgb(249, 231, 159)',
+                                  'rgb(155, 89, 182)',
+                                  'rgb(250, 215, 160)',
+                                  'rgb(118, 215, 196)',
+                                  'rgb(195, 155, 211)',
+                                  'rgb(230, 176, 170)',
+                                  'rgb(21, 167, 96)',
+                                  'rgb(23, 165, 37)',
+                                  'rgb(220, 166, 18)',
+                                  'rgb(21, 67, 96)',
+                                  'rgb(23, 165, 137)',
+                                  'rgb(120, 66, 18)',
+                                  'rgb(218, 247, 166)',
+                                  'rgb(255, 195, 0))',
+                                  'rgb(255, 87, 51)',
+                                  'rgb(100, 30, 22)',
+                                  'rgb(125, 102, 8)',
+                                  'rgb(249, 231, 159)',
+                                  'rgb(202, 111, 30)',
+                                  'rgb(155, 89, 182)',
+                                  'rgb(250, 215, 160)',
+                                  'rgb(118, 215, 196)',
+                                  'rgb(195, 155, 211)',
+                                  'rgb(230, 176, 170)',
+                                  'rgb(21, 167, 96)',
+                                  'rgb(23, 165, 37)',
+                                  'rgb(220, 166, 18)',
+                                  'rgb(21, 67, 96)',
+                                  'rgb(23, 165, 137)',
+                                  'rgb(120, 66, 18)',
+                                  'rgb(218, 247, 166)',
+                                  'rgb(255, 195, 0))',
+                                  'rgb(255, 87, 51)',
+                                  'rgb(100, 30, 22)',
+                                  'rgb(125, 102, 8)',
+                                  'rgb(249, 231, 159)',
+                                  'rgb(202, 111, 30)',
+                                  'rgb(155, 89, 182)',
+                                  'rgb(250, 215, 160)',
+                                  'rgb(118, 215, 196)',
+                                  'rgb(195, 155, 211)',
+                                  'rgb(230, 176, 170)',
+                                  'rgb(21, 167, 96)',
+                                  'rgb(23, 165, 37)',
+                                  'rgb(220, 166, 18)',
+                                  'rgb(21, 67, 96)',
+                                  'rgb(23, 165, 137)',
+                                  'rgb(120, 66, 18)',
+                                  'rgb(218, 247, 166)',
+                                  'rgb(255, 195, 0))',
+                                  'rgb(255, 87, 51)',
+                                  'rgb(100, 30, 22)',
+                                  'rgb(125, 102, 8)',
+                                  'rgb(249, 231, 159)',
+                                  'rgb(202, 111, 30)',
+                                  'rgb(155, 89, 182)',
+                                  'rgb(250, 215, 160)',
+                                  'rgb(118, 215, 196)',
+                                  'rgb(195, 155, 211)',
+                                  'rgb(230, 176, 170)',
+                                  'rgb(21, 167, 96)',
+                                  'rgb(23, 165, 37)',
+                                  'rgb(220, 166, 18)'
+                                ],
+                                borderColor: 'RGBA(255,255,255,.5)',
+                                borderWidth: 3
+                                },
+                            ]
+                          },
+                          options: {
+                            title: {
+                                display: true,
+                                text: 'Block / Creators  (All history)'
+                                },
+                            animations: {
+                              tension: {
+                                duration: 1000,
+                                easing: 'linear',
+                                from: 1,
+                                to: 0,
+                                loop: true
+                              }
+                            },
+                            label: "My Chart",
+                           hover: {
+                            yAlign: 'top',
+                              mode: 'index',
+                              intersect: false
+                           },
+                            responsive: true,
+                            interaction: {
+                              mode: 'index',
+                              intersect: false,
+                            },
+                            stacked: true,
+                              interaction: {
+                                mode: 'index',
+                                intersect: false,
+                              },
+                            layout: {
+                              padding: {
+                                top: 5 ,
+                                right: 10
+                              }
+                            },
+                            maintainAspectRatio: false,
+                            scales: {
+                                      xAxes: [{
+                                        display :false,
+                                          ticks: {
+                                          display :false,
+                                            fontSize: 12
+                                            }
+                                        }],
+                                      yAxes: [{
+                                              display :false,
+                                              type: 'linear',
+                                              position: 'left',
+                                              ticks: {
+                                                display :false,
+                                                fontSize: 12,
+                                                //stepSize : 1,
+                                            }
+                                        }],
+                              },
+                              legend: {
+                                position: 'left',
+                                  display: true,
+                                  labels: {
+                                      filter: function(item, chart) {
+                                          // Logic to remove a particular legend item goes here
+                                          return  ((item.text.includes('devnoso pool_2')) +
+                                                    (item.text.includes('f04ever')) +
+                                                    (item.text.includes('Rukzuk')) +
+                                                    (item.text.includes('GoneFishing')) +
+                                                    (item.text.includes('ravifj Pool')) +
+                                                    (item.text.includes('N4ExCj...oZfPEf')) +
+                                                    (item.text.includes('Devnoso(protocol_2) Pool')) +
+                                                    (item.text.includes('Devnoso(Old) Pool')) +
+                                                    (item.text.includes('N36XxH...Y37PDV')) +
+                                                    (item.text.includes('N2qjeX...8wfPEf')) +
+                                                    (item.text.includes('NYE45V...Ns1NGX')) +
+                                                    (item.text.includes('YZ Pool')) +
+                                                    (item.text.includes('Fechi92')) +
+                                                    (item.text.includes('devnoso Pool_test2')) +
+                                                    (item.text.includes('devnoso Pool_test1')) +
+                                                    (item.text.includes('Leviable Pool')) +
+                                                    (item.text.includes('N6VxgL...Pt2VEp')) 
+                                              )
+                                          }
+                                      }
+                                },
+                              elements: {
+                                point:{
+                                  radius: 0
+                                }
+                              },
+                                animation: {
+                                  duration:1000,
+                              },
+                            }
+                      });
+                }
+                //--------------------------------------------------------------------------------
+              function chart1 () {
+                
+                am5.ready(function() {
+                      nameArray = JSON.parse(sessionStorage.getItem('historyNameArray'))
+                      hashArray = JSON.parse(sessionStorage.getItem('historyHashArray'))
+                      
+                      var root = am5.Root.new("poolChart1");
+                      root.setThemes([
+                        am5themes_Animated.new(root)
+                      ]);
+                      var chart = root.container.children.push(am5xy.XYChart.new(root, {
+                        panX: true,
+                        panY: true,
+                        wheelX: "panX",
+                        wheelY: "zoomX",
+                        maxTooltipDistance: 0,
+                        pinchZoomX:true
+                      }));
+                      var xAxis = chart.xAxes.push(am5xy.DateAxis.new(root, {
+                        maxDeviation: 100,
+                        baseInterval: {
+                          timeUnit: "millisecond",
+                          count: 1000
+                        },
+                        renderer: am5xy.AxisRendererX.new(root, {}),
+                        tooltip: am5.Tooltip.new(root, {})
+                      }));
+                      var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+                        renderer: am5xy.AxisRendererY.new(root, {})
+                      }));
+                      let length = nameArray.length
+                      for (var i = 0; i < length; i++) {
+                        var series = chart.series.push(am5xy.LineSeries.new(root, {
+                          name: nameArray[i],
+                          xAxis: xAxis,
+                          yAxis: yAxis,
+                          valueYField: "value",
+                          valueXField: "date",
+                          legendValueText: "{valueY}",
+                          tooltip: am5.Tooltip.new(root, {
+                            pointerOrientation: "horizontal",
+                            labelText: "{valueY}"
+                          })
+                        }));
+                        var data = hashArray[i];
+                        series.data.setAll(data);
+                        series.appear();
+                      }
+                      var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {
+                        behavior: "none"
+                      }));
+                      cursor.lineY.set("visible", false);
+                      chart.set("scrollbarX", am5.Scrollbar.new(root, {
+                        orientation: "horizontal"
+                      }));
+                      chart.set("scrollbarY", am5.Scrollbar.new(root, {
+                        orientation: "vertical"
+                      }));
+                      var legend = chart.rightAxesContainer.children.push(am5.Legend.new(root, {
+                        width: 130,
+                        paddingLeft: 15,
+                        height: am5.percent(100)
+                      }));
+                      legend.itemContainers.template.events.on("pointerover", function(e) {
+                        var itemContainer = e.target;
+                        var series = itemContainer.dataItem.dataContext;
+                        chart.series.each(function(chartSeries) {
+                          if (chartSeries != series) {
+                            chartSeries.strokes.template.setAll({
+                              strokeOpacity: 0.15,
+                              stroke: am5.color(0x000000)
+                            });
+                          } else {
+                            chartSeries.strokes.template.setAll({
+                              strokeWidth: 3
+                            });
+                          }
+                        })
+                      })
+                      legend.itemContainers.template.events.on("pointerout", function(e) {
+                        var itemContainer = e.target;
+                        var series = itemContainer.dataItem.dataContext;
+                      
+                        chart.series.each(function(chartSeries) {
+                          chartSeries.strokes.template.setAll({
+                            strokeOpacity: 1,
+                            strokeWidth: 1,
+                            stroke: chartSeries.get("fill")
+                          });
+                        });
+                      })
+                      legend.itemContainers.template.set("width", am5.p100);
+                      legend.valueLabels.template.setAll({
+                        width: am5.p100,
+                        textAlign: "right"
+                      });
+                      // It's is important to set legend data after all the events are set on template, 
+                      //otherwise events won't be copied
+                      Qold = 0
+                      //addData()
+                        setInterval(function () {
+                          addData();
+                        }, 10000)
+                        async function addData() {
+                          newNameArray = JSON.parse(sessionStorage.getItem('historyNameArray'))
+                          newHashArray = JSON.parse(sessionStorage.getItem('historyHashArray'))
+                          Qnew = newHashArray[0].length
+                          console.log(Qold , Qnew)
+                          if (Qnew > Qold) {
+                            //legend.data.setAll(0)
+                            nameArray = newNameArray
+                            hashArray = newHashArray
+                            Qold = Qnew
+                            legend.data.setAll(chart.series.values);
+                            chart.appear(5000, 100);
+                            console.log('Updated')
+                          }
+                      }
+                      legend.data.setAll(chart.series.values);
+                      chart.appear(5000, 100); 
+                     
+                      
+                }); // end am5.ready()
+              }
+                //--------------------------------------------------------------------------------
+              function chart2 () {
+                am5.ready(function() {
+                        nameArray = JSON.parse(sessionStorage.getItem('historyNameArray'))
+                        minersArray = JSON.parse(sessionStorage.getItem('historyMinersArray'))
+                      
+                      var root = am5.Root.new("poolChart2");
+                      root.setThemes([
+                        am5themes_Animated.new(root)
+                      ]);
+                      var chart = root.container.children.push(am5xy.XYChart.new(root, {
+                        panX: true,
+                        panY: true,
+                        wheelX: "panX",
+                        wheelY: "zoomX",
+                        maxTooltipDistance: 0,
+                        pinchZoomX:true
+                      }));
+                      var xAxis = chart.xAxes.push(am5xy.DateAxis.new(root, {
+                        maxDeviation: 100,
+                        baseInterval: {
+                          timeUnit: "millisecond",
+                          count: 1000
+                        },
+                        renderer: am5xy.AxisRendererX.new(root, {}),
+                        tooltip: am5.Tooltip.new(root, {})
+                      }));
+                      var yAxis = chart.yAxes.push(am5xy.ValueAxis.new(root, {
+                        renderer: am5xy.AxisRendererY.new(root, {})
+                      }));
+                      let length = nameArray.length
+                      for (var i = 0; i < length; i++) {
+                        var series = chart.series.push(am5xy.LineSeries.new(root, {
+                          name: nameArray[i],
+                          xAxis: xAxis,
+                          yAxis: yAxis,
+                          valueYField: "value",
+                          valueXField: "date",
+                          legendValueText: "{value}",
+                          tooltip: am5.Tooltip.new(root, {
+                            pointerOrientation: "horizontal",
+                            labelText: "{value}"
+                          })
+                        }));
+                        var data = minersArray[i];
+                        series.data.setAll(data);
+                        series.appear();
+                      }
+                      var cursor = chart.set("cursor", am5xy.XYCursor.new(root, {
+                        behavior: "none"
+                      }));
+                      cursor.lineY.set("visible", false);
+                      chart.set("scrollbarX", am5.Scrollbar.new(root, {
+                        orientation: "horizontal"
+                      }));
+                      chart.set("scrollbarY", am5.Scrollbar.new(root, {
+                        orientation: "vertical"
+                      }));
+                      var legend = chart.rightAxesContainer.children.push(am5.Legend.new(root, {
+                        width: 130,
+                        paddingLeft: 15,
+                        height: am5.percent(100)
+                      }));
+                      legend.itemContainers.template.events.on("pointerover", function(e) {
+                        var itemContainer = e.target;
+                        var series = itemContainer.dataItem.dataContext;
+                        chart.series.each(function(chartSeries) {
+                          if (chartSeries != series) {
+                            chartSeries.strokes.template.setAll({
+                              strokeOpacity: 0.15,
+                              stroke: am5.color(0x000000)
+                            });
+                          } else {
+                            chartSeries.strokes.template.setAll({
+                              strokeWidth: 3
+                            });
+                          }
+                        })
+                      })
+                      legend.itemContainers.template.events.on("pointerout", function(e) {
+                        var itemContainer = e.target;
+                        var series = itemContainer.dataItem.dataContext;
+                      
+                        chart.series.each(function(chartSeries) {
+                          chartSeries.strokes.template.setAll({
+                            strokeOpacity: 1,
+                            strokeWidth: 1,
+                            stroke: chartSeries.get("fill")
+                          });
+                        });
+                      })
+                      legend.itemContainers.template.set("width", am5.p100);
+                      legend.valueLabels.template.setAll({
+                        width: am5.p100,
+                        textAlign: "right"
+                      });
+                      // It's is important to set legend data after all the events are set on template,
+                      // otherwise events won't be copied
+                      QMinersOld = 0
+                      addData()
+                      setInterval(function () {
+                        addData();
+                      }, 10000)
+                      async function addData() {
+                        newNameArray = JSON.parse(sessionStorage.getItem('historyNameArray'))
+                        newMinersArray = JSON.parse(sessionStorage.getItem('historyMinersArray'))
+                        QMinersNew = newMinersArray[0].length
+                        if (QMinersNew > QMinersOld) {
+                          nameArray = newNameArray
+                          minersArray = newMinersArray
+                          QMinersOld = QMinersNew
+                          legend.data.setAll(chart.series.values);
+                          chart.appear(5000, 100);
+                        }
+                      }
+                      legend.data.setAll(chart.series.values);
+                      chart.appear(5000, 100);
+                }); // end am5.ready()
+              }
+
+              //--------------------------------------------------------------------------------
+            function minersHashOverTime (hashBlocks , hashMiners , FinalData) {
+              var ctx = document.getElementById('poolChart21').getContext("2d");
+                      if (window.mypoolChart21 != undefined)
+                        window.mypoolChart21.destroy();
+                          window.mypoolChart21 = new Chart(ctx, {
+                          type: 'line',
+                          data: {
+                            labels: hashBlocks,
+                            datasets: FinalData
+                          },
+                          options: {
+                            tooltips: {
+                              mode: 'nearest',
+                              intersect: true
+                              },
+                            hover: {
+                               mode: 'x',
+                               intersect: false
+                              },
+                            plugins: {
+                              tooltip: {
+                                yAlign: 'center'
+                              },
+                            },
+                            layout: {
+                              padding: {
+                                top: 5 ,
+                                right: 10
+                              }
+                            },
+                            title: {
+                                display: true,
+                                font: {
+                                  fontSize: 50,
+                                  },
+                                text: 'Miner Solutions (24 Blocks - 4 Hours)'
+                              },
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                  xAxes: [{
+                                      display : true,
+                                      ticks: {
+                                          fontSize: 8
+                                        }
+                                    }],
+                                  yAxes: [{
+                                    display :true,
+                                      ticks: {
+                                        type: 'linear',
+                                          display : true,
+                                          fontSize: 8,
+                                          min : 6000,
+                                          max : 9000,
+                                          //stepSize : 1,
+                                        }
+                                    }],
+                              },
+                              legend: {
+                                  position: 'left',
+                                  boxWidth: 20,
+                                  fontSize: 3,
+                                  display: true
+                                  
+                                },
+                              elements: {
+                                point:{
+                                  radius: 0
+                                }
+                              },
+                                animation: {
+                                  duration: 0000,
+                              },
+                            }
+                      });
+              }
+
+
+
+            }
+
+
+          
+
+</script>
+
+</body>
+
+</html>
