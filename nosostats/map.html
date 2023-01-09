@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+        <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+        <script src="https://cdn.amcharts.com/lib/5/map.js"></script>
+        <script src="https://cdn.amcharts.com/lib/5/geodata/worldLow.js"></script>
+        <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+        <script src="https://cdn.amcharts.com/lib/5/radar.js"></script>
+        <link rel="shortcut icon" type="image/x-icon" href="noso190X190.png" />
+        <script type="text/javascript" src="main.js"></script>
+        <meta charset="UTF-8">
+        <style>
+          h2 {text-align: center;}
+          table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            }
+        </style>
+        <title>NOSO Map</title>
+        <link rel="stylesheet" href="nodes.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"
+          integrity="sha512-d9xgZrVZpmmQlfonhQUvTR7lMPtO7NkZMkA0ABN3PHCbKA5nqylQ/yWlFAyY6hYgdF1Qh6nYiuADWwKB4C2WSw=="
+          crossorigin="anonymous">
+          </script>
+      </head>
+    <body>
+      <marquee>   </marquee>
+
+          <div class="header">
+           
+            <div class="headerElement">
+                <div id="chartLabel"></div>
+                <div id ='ss'>
+                  <canvas id="networkStats"></canvas>
+                </div>
+            </div>
+            <div class="headerElement">
+                <div id="chartLabel">Mn's</div>
+                <div id ='ss'>
+                  <canvas id="blockTime"></canvas>
+                </div>
+            </div>
+            <div class="headerElement">
+                <div  id="chartLabel">Orders per Block</div>
+                  <div id ='ss'>
+                <canvas id="mini"></canvas>
+              </div>
+            </div>
+            <div class="headerElement">
+                <div id="chartLabel">Amounts per block</div>
+                  <div id ='ss'>
+                <canvas id="mid"></canvas>
+              </div>
+            </div>
+            <div class="headerElement">
+                <div id="chartLabel">Pending Orders</div>
+                <div id="big"></div>
+            </div>
+        </div>
+      <div class="mainPart">
+          <div class="menu">
+            <div id='newCounter'></div>
+            <button type="button" id="explorer" onclick="explorer()">NOSO Chain</button>
+            <button type="button" id="nodes" onclick="nodes()">Active Nodes</button>
+            <button type="button" id="map" onclick="map()">Map</button>
+            <button type="button" id="explorer1" onclick="explorer1()">Explorer <br> (Under constuction)</button>
+            <button type="button" id="pools" onclick="pools()">PoPW <br> Participation</button>
+            <button type="button" id="CandA" onclick="CandA()">Coins & Addresses</button>
+            <div id ='menuCharts'>
+              <canvas id="distributionCanvas"></canvas>
+            </div>
+            <div id ='menuCharts'>
+              <canvas id="clientCanvas"></canvas>
+            </div>
+            <div id ='menuCharts'>
+              <canvas id="solCanvas"></canvas>
+              </div>
+          </div>
+                <div class="result">
+                    <div class="nodeMap">
+                        <div id="mapBox1">
+                          <!--<canvas id="mapChart"></canvas>-->
+                        </div>
+                    </div>
+                    <div class="nodeMap">
+                        <div id="mapBox2">
+                          <!--<canvas id="mapChart"></canvas>-->
+                        </div>
+                      </div> 
+                    <div class="nodeMap">
+                        <div id="mapBox3">
+                          <!--<canvas id="mapChart"></canvas>-->
+                        </div>
+                      </div> 
+                    <div class="nodeMap">
+                        <div id="mapBox4">
+                          <!--<canvas id="mapChart"></canvas>-->
+                        </div>
+                      </div> 
+                  </div>
+              </div>
+        <script>
+            console.log('state :' , sessionStorage.state)
+            if (sessionStorage.state === 'map'){
+              //refreshMap()
+            } else {
+              document.getElementById("map").style.backgroundColor = "RGBA(96, 125, 139)";
+              sessionStorage.setItem("state", 'map');
+              //pendingOrders()
+              refreshMap()
+              }
+              //-----------------------------------------------------------------------------------------
+            async function refreshMap(){
+              clients = []
+              console.log('state inside refresh :' , sessionStorage.state)
+              let response = await fetch(sessionStorage.apiServer + 'globeMnData');
+              let data1 = await response.json();
+              let response1 = await fetch(sessionStorage.apiServer + 'reportClients');
+              let data2 = await response1.json();
+              data2.forEach(row => {
+                let _id = row[0];
+                let value = row[1];
+                payload = {'id' : _id , 'value' : value}
+                clients.push(payload);
+                })
+                let response3 = await fetch(sessionStorage.apiServer + 'poolsOnMap');
+                let data3 = await response3.json();
+                let cities = data3
+                console.log(clients)
+              document.getElementById("map").style.backgroundColor = "RGBA(96, 125, 139)";
+
+              renderHTML( cities)
+              }
+             
+            function renderHTML(cities) {
+              //---------------------------------------------------------------------------------------------------
+              //------------------------------ Network Nodes ------------------------------------------------------
+              //---------------------------------------------------------------------------------------------------
+              am5.ready(function() {
+                var root = am5.Root.new("mapBox1");
+                root.setThemes([am5themes_Animated.new(root)]);
+                var chart = root.container.children.push(am5map.MapChart.new(root, {}));
+                var polygonSeries = chart.series.push(
+                  am5map.MapPolygonSeries.new(root, {
+                    geoJSON: am5geodata_worldLow,
+                    exclude: ["AQ"]
+                  })
+                );
+                chart.children.unshift(am5.Label.new(root, {
+                  text: "Network Nodes",
+                  fontSize: 25,
+                  fontWeight: "500",
+                  textAlign: "center",
+                  x: am5.percent(70),
+                  centerX: am5.percent(50),
+                  paddingTop: 0,
+                  paddingBottom: 0
+                }));
+                var bubbleSeries = chart.series.push(
+                  am5map.MapPointSeries.new(root, {
+                    valueField: "value",
+                    calculateAggregates: true,
+                    polygonIdField: "id"
+                  })
+                );
+                var circleTemplate = am5.Template.new({});
+                bubbleSeries.bullets.push(function(root, series, dataItem) {
+                  var container = am5.Container.new(root, {});
+                  var circle = container.children.push(
+                    am5.Circle.new(root, {
+                      radius: 20,
+                      fillOpacity: 0.7,
+                      fill: am5.color(0x00ff00), //green
+                      cursorOverStyle: "pointer",
+                      tooltipText: `{name}: [bold]{value}[/]`
+                    }, circleTemplate)
+                  );
+                  var countryLabel = container.children.push(
+                    am5.Label.new(root, {
+                      text: "{''}",
+                      paddingLeft: 5,
+                      populateText: true,
+                      fontWeight: "bold",
+                      fontSize: 13,
+                      centerY: am5.p50
+                    })
+                  );
+                  circle.on("radius", function(radius) {
+                    countryLabel.set("x", radius);
+                  })
+                  return am5.Bullet.new(root, {
+                    sprite: container,
+                    dynamic: true
+                  });
+                });
+                bubbleSeries.bullets.push(function(root, series, dataItem) {
+                  return am5.Bullet.new(root, {
+                    sprite: am5.Label.new(root, {
+                      text: "{value.formatNumber('#.')}",
+                      fill: am5.color(0x000000),
+                      populateText: true,
+                      centerX: am5.p50,
+                      centerY: am5.p50,
+                      textAlign: "center"
+                    }),
+                    dynamic: true
+                  });
+                });
+                bubbleSeries.set("heatRules", [
+                  {
+                    target: circleTemplate,
+                    dataField: "value",
+                    min: 10,
+                    max: 50,
+                    minValue: 0,
+                    maxValue: 100,
+                    key: "radius"
+                  }
+                ]);
+                
+                //++++++++++++++++++++++++++++++++++
+                updateData();
+                setInterval(function() {
+                  updateData();
+                }, 100000)
+
+                function zeroData() {
+                  for (var i = 0; i < bubbleSeries.dataItems.length; i++) {
+                      bubbleSeries.data.setIndex(i, { value: 0 , id: nodes[i].id, name: nodes[i].id })
+                    }
+                }
+                async function updateData() {
+                  let response = await fetch(sessionStorage.apiServer + 'globeMnData');
+                  let data = await response.json();
+                  bubbleSeries.data.setAll(data);
+                }
+                }); 
+              //---------------------------------------------------------------------------------------------------
+              //------------------------------ popw participation ------------------------------------------------------
+              //---------------------------------------------------------------------------------------------------
+              am5.ready(function() {
+                var root = am5.Root.new("mapBox2");
+                root.setThemes([am5themes_Animated.new(root)]);
+                var chart = root.container.children.push(am5map.MapChart.new(root, {}));
+                var polygonSeries = chart.series.push(
+                  am5map.MapPolygonSeries.new(root, {
+                    geoJSON: am5geodata_worldLow,
+                    exclude: ["AQ"]
+                  })
+                );
+                chart.children.unshift(am5.Label.new(root, {
+                  text: "PoPW Participation",
+                  fontSize: 25,
+                  fontWeight: "500",
+                  textAlign: "center",
+                  x: am5.percent(70),
+                  centerX: am5.percent(50),
+                  paddingTop: 0,
+                  paddingBottom: 0
+                }));
+                var bubbleSeries = chart.series.push(
+                  am5map.MapPointSeries.new(root, {
+                    valueField: "value",
+                    calculateAggregates: true,
+                    polygonIdField: "id"
+                  })
+                );
+                var circleTemplate = am5.Template.new({});
+                bubbleSeries.bullets.push(function(root, series, dataItem) {
+                  var container = am5.Container.new(root, {});
+                  var circle = container.children.push(
+                    am5.Circle.new(root, {
+                      radius: 20,
+                      fillOpacity: 0.7,
+                      fill: am5.color(0x5882FA), //
+                      cursorOverStyle: "pointer",
+                      tooltipText: `{name}: [bold]{value}[/]`
+                    }, circleTemplate)
+                  );
+                  var countryLabel = container.children.push(
+                    am5.Label.new(root, {
+                      text: "{''}",
+                      paddingLeft: 5,
+                      populateText: true,
+                      fontWeight: "bold",
+                      fontSize: 13,
+                      centerY: am5.p50
+                    })
+                  );
+                  circle.on("radius", function(radius) {
+                    countryLabel.set("x", radius);
+                  })
+                  return am5.Bullet.new(root, {
+                    sprite: container,
+                    dynamic: true
+                  });
+                });
+                bubbleSeries.bullets.push(function(root, series, dataItem) {
+                  return am5.Bullet.new(root, {
+                    sprite: am5.Label.new(root, {
+                      text: "{value.formatNumber('#.')}",
+                      fill: am5.color(0x000000),
+                      populateText: true,
+                      centerX: am5.p50,
+                      centerY: am5.p50,
+                      textAlign: "center"
+                    }),
+                    dynamic: true
+                  });
+                });
+                bubbleSeries.set("heatRules", [
+                  {
+                    target: circleTemplate,
+                    dataField: "value",
+                    min: 10,
+                    max: 50,
+                    minValue: 0,
+                    maxValue: 100,
+                    key: "radius"
+                  }
+                ]);
+                
+                //++++++++++++++++++++++++++++++++++
+                updateData();
+                setInterval(function() {
+                  updateData();
+                }, 100000)
+
+                function zeroData() {
+                  for (var i = 0; i < bubbleSeries.dataItems.length; i++) {
+                      bubbleSeries.data.setIndex(i, { value: 0 , id: nodes[i].id, name: nodes[i].id })
+                    }
+                }
+                async function updateData() {
+                  let response = await fetch(sessionStorage.apiServer + 'popwGlobe');
+                  let data = await response.json();
+                  bubbleSeries.data.setAll(data);
+                }
+                }); 
+                //---------------------------------------------------------------------------------------------------
+                //-------------------------------- server clients ---------------------------------------------------
+                //---------------------------------------------------------------------------------------------------
+                am5.ready(function() {
+  
+                    var root = am5.Root.new("mapBox4");
+                    root.setThemes([am5themes_Animated.new(root)]);
+                    var chart = root.container.children.push(am5map.MapChart.new(root, {}));
+                    var polygonSeries = chart.series.push(
+                      am5map.MapPolygonSeries.new(root, {
+                        geoJSON: am5geodata_worldLow,
+                        exclude: ["AQ"]
+                      })
+                    );
+                    chart.children.unshift(am5.Label.new(root, {
+                      text: "Server Clients",
+                      fontSize: 25,
+                      fontWeight: "500",
+                      textAlign: "center",
+                      x: am5.percent(70),
+                      centerX: am5.percent(50),
+                      paddingTop: 0,
+                      paddingBottom: 0
+                    }));
+                    var bubbleSeries = chart.series.push(
+                      am5map.MapPointSeries.new(root, {
+                        valueField: "value",
+                        calculateAggregates: true,
+                        polygonIdField: "id"
+                      })
+                    );
+                    var circleTemplate = am5.Template.new({});
+                    bubbleSeries.bullets.push(function(root, series, dataItem) {
+                      var container = am5.Container.new(root, {});
+                      var circle = container.children.push(
+                        am5.Circle.new(root, {
+                          radius: 20,
+                          fillOpacity: 0.7,
+                          fill: am5.color(0xff0000), //red
+                          cursorOverStyle: "pointer",
+                          tooltipText: `{name}: [bold]{value}[/]`
+                        }, circleTemplate)
+                      );
+                      var countryLabel = container.children.push(
+                        am5.Label.new(root, {
+                          text: "{''}",
+                          paddingLeft: 5,
+                          populateText: true,
+                          fontWeight: "bold",
+                          fontSize: 13,
+                          centerY: am5.p50
+                        })
+                      );
+                      circle.on("radius", function(radius) {
+                        countryLabel.set("x", radius);
+                      })
+                      return am5.Bullet.new(root, {
+                        sprite: container,
+                        dynamic: true
+                      });
+                     });
+                    bubbleSeries.bullets.push(function(root, series, dataItem) {
+                      return am5.Bullet.new(root, {
+                        sprite: am5.Label.new(root, {
+                          text: "{value.formatNumber('#.')}",
+                          fill: am5.color(0x000000),
+                          populateText: true,
+                          centerX: am5.p50,
+                          centerY: am5.p50,
+                          textAlign: "center"
+                        }),
+                        dynamic: true
+                      });
+                      });
+                    // minValue and maxValue must be set for the animations to work
+                    bubbleSeries.set("heatRules", [
+                      {
+                        target: circleTemplate,
+                        dataField: "value",
+                        min: 10,
+                        max: 50,
+                        minValue: 0,
+                        maxValue: 100,
+                        key: "radius"
+                      }
+                      ]);
+ 
+                    updateData();
+                    setInterval(function() {
+                      updateData();
+                     }, 10000)
+                      
+                    async function updateData() {
+                         newClients = []
+                         let response3 = await fetch(sessionStorage.apiServer + 'reportClients');
+                             let refresh = await response3.json();
+                             refresh.forEach(row => {
+                                let _id = row[0];
+                                let value = row[1];
+                                payload = {'id' : _id , 'value' : value}
+                                newClients.push(payload);
+                                })
+                         bubbleSeries.data.setAll(newClients);
+                    }
+                }); 
+                //---------------------------------------------------------------------------------------------------
+                //------------------------------------ Network pools ------------------------------------------------
+                //---------------------------------------------------------------------------------------------------
+                am5.ready(function() {
+                var root = am5.Root.new("mapBox3");
+                root.setThemes([
+                  am5themes_Animated.new(root)
+                ]);
+                root.setThemes([am5themes_Animated.new(root)]);
+                var chart = root.container.children.push(am5map.MapChart.new(root, {
+                  panX: "rotateX",
+                  panY: "translateY",
+                  projection: am5map.geoMercator()
+                }));
+                var polygonSeries = chart.series.push(
+                  am5map.MapPolygonSeries.new(root, {
+                    geoJSON: am5geodata_worldLow,
+                    //exclude: ["AQ"]
+                  })
+                );
+                chart.children.unshift(am5.Label.new(root, {
+                  text: "Network Pools",
+                  fontSize: 25,
+                  fontWeight: "500",
+                  textAlign: "center",
+                  x: am5.percent(70),
+                  centerX: am5.percent(50),
+                  paddingTop: 0,
+                  paddingBottom: 0
+                }));
+                var cont = chart.children.push(
+                  am5.Container.new(root, {
+                    layout: root.horizontalLayout,
+                    x: 20,
+                    y: 40
+                  })
+                );
+                cont.children.push(
+                  am5.Label.new(root, {
+                    centerY: am5.p50,
+                    text: "Map"
+                  })
+                );
+                var switchButton = cont.children.push(
+                  am5.Button.new(root, {
+                    themeTags: ["switch"],
+                    centerY: am5.p50,
+                    icon: am5.Circle.new(root, {
+                      themeTags: ["icon"]
+                    })
+                  })
+                );
+                switchButton.on("active", function() {
+                  if (!switchButton.get("active")) {
+                    chart.set("projection", am5map.geoMercator());
+                    chart.set("panY", "translateY");
+                    chart.set("rotationY", 0);
+                    backgroundSeries.mapPolygons.template.set("fillOpacity", 0);
+                  } else {
+                    chart.set("projection", am5map.geoOrthographic());
+                    chart.set("panY", "rotateY")
+                
+                    backgroundSeries.mapPolygons.template.set("fillOpacity", 0.1);
+                  }
+                });
+                cont.children.push(
+                  am5.Label.new(root, {
+                    centerY: am5.p50,
+                    text: "Globe"
+                  })
+                );
+                var backgroundSeries = chart.series.push(am5map.MapPolygonSeries.new(root, {}));
+                backgroundSeries.mapPolygons.template.setAll({
+                  fill: root.interfaceColors.get("alternativeBackground"),
+                  fillOpacity: 0,
+                  strokeOpacity: 0,
+                });
+                backgroundSeries.data.push({
+                  geometry: am5map.getGeoRectangle(90, 180, -90, -180)
+                });
+                var polygonSeries = chart.series.push(
+                  am5map.MapPolygonSeries.new(root, {
+                    geoJSON: am5geodata_worldLow,
+                    exclude: ["AQ"]
+                  })
+                );
+                var lineSeries = chart.series.push(am5map.MapLineSeries.new(root, {}));
+                lineSeries.mapLines.template.setAll({
+                  stroke: root.interfaceColors.get("alternativeBackground"),
+                  strokeOpacity: 0.3
+                });
+                var pointSeries = chart.series.push(am5map.MapPointSeries.new(root, {}));
+                var colorset = am5.ColorSet.new(root, {});
+                pointSeries.bullets.push(function () {
+                  var container = am5.Container.new(root, {});
+                  var circle = container.children.push(
+                    am5.Circle.new(root, {
+                      radius: 4,
+                      tooltipY: 0,
+                      fill:  am5.color(0x000069),
+                      strokeOpacity: 0,
+                      tooltipText: "{title}"
+                    })
+                  );
+                  var circle2 = container.children.push(
+                    am5.Circle.new(root, {
+                      radius: 4,
+                      tooltipY: 0,
+                      fill:  am5.color(0x0000ff),
+                      strokeOpacity: 0,
+                      tooltipText: "{title}: [bold]"
+                    })
+                  );
+                  circle.animate({
+                    key: "scale",
+                    from: 1,
+                    to: 10,
+                    duration: 10000,
+                    easing: am5.ease.out(am5.ease.cubic),
+                    loops: Infinity
+                  });
+                  circle.animate({
+                    key: "opacity",
+                    from: 1,
+                    to: 0,
+                    duration: 10000,
+                    easing: am5.ease.out(am5.ease.cubic),
+                    loops: Infinity
+                  });
+                  return am5.Bullet.new(root, {
+                    sprite: container
+                  });
+                });
+                for (var i = 0; i < cities.length; i++) {
+                  var city = cities[i];
+                  addCity(city.longitude, city.latitude, city.title);
+                }
+                function addCity(longitude, latitude, title) {
+                  pointSeries.data.push({
+                    geometry: { type: "Point", coordinates: [longitude, latitude] },
+                    title: title
+                  });
+                }
+                chart.appear(1000, 100);
+                }); 
+              //---------------------------------------------------------------------------------------------------
+            }    
+         </script>
+    </body>
+  </html>
