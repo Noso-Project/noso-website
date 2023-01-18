@@ -845,6 +845,19 @@ label {
 
 	}
 
+/*	Language
+	==================================================*/
+
+#lang-menu {
+	text-align: center;
+	
+}
+#lang-menu .dropdown-item {
+	color: #2c3e50;
+}
+#lang-menu .dropdown-item:hover, .dropdown-item:focus {
+	color: #f8c339;
+}
 
 /*	Responsive
 	==================================================*/
