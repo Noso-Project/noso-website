@@ -1,9 +1,4 @@
-============
-Noso Website
-============
-
-.. raw:: html
-
+# [Noso Websute](https://nosocoin.com/) 
    <p align="center">
      <a href='https://docs.nosocoin.com/><img src='https://github.com/Noso-Project/noso-website/blob/main/assets/images/noso_logo.png' alt='Noso Docs' /></a>
    </p>
