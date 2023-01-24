@@ -9,7 +9,7 @@ am5.ready(function() {
           })
         );
         chart.children.unshift(am5.Label.new(root, {
-          text: "PoPW Participation",
+          text: "",
           fontSize: 25,
           fontWeight: "500",
           textAlign: "center",
