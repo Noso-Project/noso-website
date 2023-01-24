@@ -13,4 +13,4 @@ Noso has a strong focus on sustainability, scalability, and transparency.  It is
 
 Noso uses a democratic governance system (GVT) built into mainnet which will allow the project to evolve over time. and promote contributor participation.  The project will fund itself in a sustainable way through the use of project funds derived from the creation of each block. 
 
-You can read more about Noso on the `official Noso website` http://nosocoin.com/`_.  If you are looking for a user-friendly wallet for Noso, please take a look at `Nosolite`_ for a desktop wallet or `NosoMobile`_ for a mobile wallet. See `Noso Docs` for more detailed information.
+You can read more about Noso on the official Noso website - https://nosocoin.com/.  If you are looking for a user-friendly wallet for Noso, please take a look at `Nosolite`_ for a desktop wallet or `NosoMobile`_ for a mobile wallet. Both available on in the  Noso Project repos. See Noso Docs for more detailed information.
