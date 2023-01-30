@@ -9,7 +9,7 @@ Noso is a dynamic and sustainable Peer-to-Peer crypto currency and platform, acc
 
 The Noso platform has been designed from the ground up by a team with more than a decade of experience in blockchain technologies.  The blockchain is lightweight and is not a fork, token, or a copy of any other existing codebase.  
 
-Noso has a strong focus on sustainability, scalability, and transparency.  It is an open source project that aims to deliver an equitible and sustainable infrastructure for financial and social applications on a global scale. 
+Noso has a strong focus on sustainability, scalability, and transparency.  It is an open source project that aims to deliver an equitable and sustainable infrastructure for financial and social applications on a global scale. 
 
 Noso uses a democratic governance system (GVT) built into mainnet which will allow the project to evolve over time and promote contributor participation.  The project will fund itself in a sustainable way through the use of project funds derived from the creation of each block. 
 
