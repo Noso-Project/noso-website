@@ -1,0 +1,270 @@
+@import "components";
+
+.toggle-bar{
+    display: none;
+}
+.d-none{
+    display: none;
+}
+// header 
+.main-header{
+    background-image: url('../img/Header.png');
+    background-repeat: no-repeat;
+    height: 100vh;
+    background-size: 100% 100%;
+    position: relative;
+    .navbar{
+        background-color: #2c3e50b9;
+        padding: 15px 0;
+        border-bottom: 2px solid $primary-900;
+    }
+    .nav-left{
+        a > img{
+            width: 120px;
+        }
+    }
+    .nav-right {
+        .button-sm{
+            margin-left: 25px;
+        }
+    }
+    .nav-menus{
+        li{
+            margin-right: 25px;
+            a{
+                @extend .bodyFontSemiBold-14;
+                text-transform: uppercase;
+                color: $neutral-300;
+            }
+        }
+    }
+}
+.faq-container{
+    .faq-page::after{
+        content: '';
+        width: 50px;
+        height: 30px;
+        display: inline-block;
+        background-image: url('../img/icon-chevron-down.png');
+        background-repeat: no-repeat;
+        background-position: center center;
+        vertical-align: middle;
+    }
+    .faq-page.active::after{
+        @extend ::after;
+        background-image: url('../img/icon-chevron-up.png');
+    }
+    .faq-page{
+        display: flex;
+        cursor: pointer;
+        justify-content: space-between;
+        margin: 10px 0;
+    }
+    .faq-body{
+        display: none;
+        @extend .bodyFontRegular-16;
+    }
+    .faq-body.active{
+        display: block;
+    }
+}
+.hero-area{
+    p{
+        font-size: 26px;
+        color: $neutral-200;
+        font-weight: 500;
+    }
+}
+
+// header 
+
+// HEADER BOTTOM PART START 
+.header-bottom{
+    background-image: url('../img/top-1.png'), url('../img/header-top.png');
+    padding: 200px 0;
+    background-repeat: no-repeat;
+    background-size: 60%, 80%;
+    background-position: 700px 50px, 559px;
+    .item{
+        margin-bottom: 50px;
+    }
+}
+// HEADER BOTTOM PART FINISH
+
+// ABOUT NOSO 
+.about-noso{
+    background-image: url('../img/about-blurry.png');
+    background-size: 70%;
+    background-position: 90%;
+    background-repeat: no-repeat;
+    .about-right-noso{
+        margin-bottom: 50px;
+        width: 80%;
+    }
+}
+// ABOUT NOSO 
+
+// FEATURE PART 
+.feature{
+    background-image: url('../img/feature-blurry.png');
+    background-size: 60%;
+    background-position: 75% 100px;
+    background-repeat: no-repeat;
+    .featured-list{
+        .list-item{
+            margin-bottom: 50px;
+        }
+    }
+}
+// FEATURE PART 
+
+// TRADE WITH NOSO 
+.trade-noso{
+    background-image: url('../img/trade.png');
+    background-size: 80%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    .item{
+        p{
+            @extend .bodyFontSemiBold-18;
+            color: $neutral-300;
+            margin: 0;
+        }
+    }
+}
+// TRADE WITH NOSO 
+
+// NOSO COMMUNITY 
+.noso-community{
+    background-image: url(../img/community-blur.png);
+    background-size: 40%;
+    background-position: 76% 70%;
+    background-repeat: no-repeat;
+}
+// NOSO COMMUNITY 
+
+// NOSO ROADMAP 
+.noso-roadmap{
+    background-image: url(../img/roadmap.png);
+    background-size: 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+    .text-center{
+        a{
+            @extend .bodyFontRegular-18;
+            color: $neutral-300;
+            img{
+                margin-top: -5px;
+
+            }
+        }
+    }
+}
+// NOSO ROADMAP 
+
+// FAQ
+.faq{
+    background-image: url(../img/faq-blurry.png);
+    background-size: 90%;
+    background-position: -177px;
+    background-repeat: no-repeat;
+}
+// FAQ
+
+// GETTING START 
+.get-startnoso{
+    background-image: url(../img/getting-start.png);
+    background-size: 60%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    .top-part{
+        p{
+            width: 40%;
+            margin: 0 auto;
+        }
+        
+    }
+}
+// GETTING START 
+
+// FOOTER PART 
+.main-footer{
+    padding-bottom: 50px;
+    .top-part{
+        border-top: 1px solid $neutral-900;
+        border-bottom: 1px solid $neutral-900;
+        padding: 30px 0;
+        .item{
+            a{
+                font-weight: 700;
+            }
+            width: 230px;
+            span{
+                display: inline-block;
+                width: 70px;
+                height: 70px;
+                margin-bottom: 15px;
+                line-height: 70px;
+                text-align: center;
+                background-color: $primary-900;
+                color: $black;
+                font-size: 35px;
+                border-radius: 100px;
+            }
+        }
+    }
+    .footer-menu{
+        margin: 20px 0;
+        a{
+            display: inline-block;
+            margin-right: 30px;
+            color: $neutral-300;
+            font-weight: 500;
+        }
+        a:last-child{
+            margin-right: 0;
+        }
+    }
+    p{
+        margin: 30px 0;
+        font-size: 14px;
+        color: $neutral-600;
+    }
+    .social-icon{
+        li{
+            display: inline-block;
+            margin-right: 20px;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            background-color: $neutral-800;
+            text-align: center;
+            color: $neutral-100;
+            font-size: 18px;
+            border-radius: 50px;
+        }
+        li:last-child{
+            margin-right: 0;
+        }
+    }
+}
+.animate__animated{
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+.navbar{
+    position: fixed;
+    left: 0;
+    width: 100%;
+    top: 0;
+    z-index: 1200;
+}
+.hero-area {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
+}
+// FOOTER PART 
+

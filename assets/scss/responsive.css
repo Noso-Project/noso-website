@@ -1,0 +1,850 @@
+/* // Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+    .container {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+    .col-6,.col-5{
+        flex-basis: 100%;
+    }
+    .toggle-bar{
+        display: block;
+        font-size: 30px;
+    }
+    .nav-right{
+        display: none;
+    }
+    .top_title {
+        color: #F8C339;
+        letter-spacing: 2px;
+    }
+    .bodyFontSemiBold-16, .top_title, .button-md {
+        font-size: 12px;
+        line-height: 150%;
+    }
+    h1 {
+        font-size: 40px;
+    }
+    .hero-area p {
+        font-size: 18px;
+        color: #E3ECF4;
+        font-weight: 500;
+    }
+    .none{
+        display: none;
+    }
+    .button-lg {
+        padding: 15px 20px;
+        border-radius: 8px;
+    }
+    .bodyFontSemiBold-18, .trade-noso .item p, .button-lg {
+        font-size: 14px;
+        line-height: 150%;
+    }
+    .py-200 {
+        padding: 70px 0;
+    }
+    .main-header {
+        background-image: url("../img/Header.png");
+        background-repeat: no-repeat;
+        height: 700px;
+        background-size: cover;
+        position: relative;
+    }
+    .header-bottom {
+        background-image: url("../img/header-top.png");
+        padding: 50px 0;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+    .about-noso {
+        background-image: url("../img/about-blurry.png");
+        background-size: cover;
+        background-position: bottom center;
+        background-repeat: no-repeat;
+    }
+    .feature {
+        background-image: url("../img/feature-blurry.png");
+        background-size: cover;
+        background-position: bottom center;
+        background-repeat: no-repeat;
+    }
+    .trade-noso {
+        background-image: url("../img/trade.png");
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+    .noso-community {
+        background-image: url(../img/community-blur.png);
+        background-size: 150%;
+        background-position: bottom center;
+        background-repeat: no-repeat;
+    }
+    .noso-roadmap {
+        background-image: url("../img/about-blurry.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    .faq {
+        background-image: url(../img/faq-blurry.png);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    .get-startnoso {
+        background-image: url(../img/getting-start.png);
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+    h2 {
+        font-size: 28px;
+    }
+    h5, .h5 {
+        font-size: 14px;
+    }
+    h4, .h4 {
+        font-size: 18px;
+    }
+    h5, .h5 {
+        font-size: 12px;
+    }
+    body{
+        font-size: 12px;
+        line-height: 20px;
+    }
+    .about-left {
+        margin-bottom: 50px;
+    }
+    .px-2 {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .bodyFontRegular-16, .faq-container .faq-body {
+        font-size: 12px;
+        line-height: 150%;
+        padding-top: 5px;
+    }
+    .about-right-noso img{
+        width: 40px;
+    }
+    .pl-2 {
+        padding-left: 10px;
+    }
+    .col-4 {
+        flex-basis: 100%;
+    }
+    .col-sm-4{
+        flex-basis: 33.32%;
+    }
+    .col-sm-6{
+        flex-basis: 50% !important;
+    }
+    .col-8 {
+        flex-basis: 100%;
+    }
+    .roadmap {
+        padding-top: 0px;
+        width: 100%;
+        position: relative;
+        margin: 0 auto;
+    }
+    .roadmap .left .position, .roadmap .right .position {
+        position: absolute;
+        left: -20%;
+        top: 0;
+        z-index: 1;
+        width: 38px;
+    }
+    .roadmap .left, .roadmap .right{
+        margin: 35px auto;
+    }
+    .roadmap .left::before, .roadmap .right::before{
+        content: "";
+        position: absolute;
+        left: -50px;
+        top: 6px;
+        border-width: 15px 25px;
+        border-color: transparent #F8C339 transparent transparent;
+        display: inline-block;
+        border-style: solid;
+    }
+    .roadmap .right::after{
+        display: none;
+    }
+    .roadmap .left, .roadmap .right {
+        margin-left: auto !important;
+        margin-right: 0;
+    }
+    .roadmap .left, .roadmap .right {
+        width: 85%;
+        position: relative;
+        margin-bottom: 50px;
+        text-align: left;
+    }
+    .roadmap::after, .faq-container .roadmap.faq-page.active::after {
+        content: "";
+        width: 5px;
+        height: 100%;
+        background-color: #F8C339;
+        display: block;
+        position: absolute;
+        left: 15px;
+        border-radius: 20px;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .roadmap .right .d-flex {
+        justify-content: flex-start;
+    }
+    .faq-container .faq-page {
+        display: flex;
+        cursor: pointer;
+        justify-content: space-between;
+        margin: 10px 0;
+        align-items: center;
+    }
+    .get-startnoso .top-part p {
+        width: 100%;
+        margin: 0 auto;
+    }
+    .col-3 {
+        flex-basis: 50%;
+        margin-bottom: 30px;
+    }
+    .main-footer .top-part .item {
+        width: 230px;
+        margin-bottom: 30px;
+    }
+    .main-footer .footer-menu a {
+        display: inline-block;
+        margin-right: 15px;
+        color: #D3E0ED;
+        font-weight: 500;
+    }
+    .main-footer p {
+        margin: 30px 0;
+        font-size: 12px;
+        color: #8C9CAC;
+    }
+    .main-footer .social-icon li {
+        display: inline-block;
+        margin-right: 10px;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        background-color: #505C68;
+        text-align: center;
+        color: #F2F6FA;
+        font-size: 18px;
+        border-radius: 50px;
+    }
+    .only-mb-5{
+        margin-bottom: 50px !important;
+        padding-bottom: 0 !important;
+    }
+    .position-relative{
+        position: relative;
+    }
+    .nav-right {
+        position: absolute;
+        left: 0;
+        top: 50px;
+        width: 100%;
+        background-color: rgb(44, 62, 80);
+        padding: 20px;
+        z-index: 10;
+    }
+    .nav-menus {
+        display: flex;
+        flex-direction: column;
+        gap: 13px;
+    }
+    .main-header .nav-right .button-sm {
+        margin-left: 0;
+        margin-top: 20px;
+    }
+    .main-header .nav-left a > img {
+        width: 80px;
+    }
+    .main-header .navbar {
+        background-color: rgba(44, 62, 80, 0.7254901961);
+        padding: 13px 0;
+        border-bottom: 2px solid #F8C339;
+    }
+    .col-sm-4{
+        flex-basis: 50%;
+    }
+    .col-sm-4 .item{
+        padding-top: 0 !important;
+        margin-bottom: 25px !important;
+    }
+    .m-none{
+        display: none;
+    }
+    .d-sm-flex{
+        display: block;
+    }
+
+}
+
+/* // Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .container{
+        max-width: 530px;
+        margin: 0 auto;
+    }
+    .col-6,.col-5{
+        flex-basis: 100%;
+    }
+    .toggle-bar{
+        display: block;
+        font-size: 30px;
+    }
+    .nav-right{
+        display: none;
+    }
+    .top_title {
+        color: #F8C339;
+        letter-spacing: 2px;
+    }
+    .bodyFontSemiBold-16, .top_title, .button-md {
+        font-size: 12px;
+        line-height: 150%;
+    }
+    h1 {
+        font-size: 40px;
+    }
+    .hero-area p {
+        font-size: 18px;
+        color: #E3ECF4;
+        font-weight: 500;
+    }
+    .none{
+        display: none;
+    }
+    .button-lg {
+        padding: 15px 20px;
+        border-radius: 8px;
+    }
+    .bodyFontSemiBold-18, .trade-noso .item p, .button-lg {
+        font-size: 14px;
+        line-height: 150%;
+    }
+    .py-200 {
+        padding: 70px 0;
+    }
+    .main-header {
+        background-image: url("../img/Header.png");
+        background-repeat: no-repeat;
+        height: 800px;
+        background-size: cover;
+    }
+    .header-bottom {
+        background-image: url("../img/header-top.png");
+        padding: 50px 0;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+    .about-noso {
+        background-image: url("../img/about-blurry.png");
+        background-size: cover;
+        background-position: bottom center;
+        background-repeat: no-repeat;
+    }
+    .feature {
+        background-image: url("../img/feature-blurry.png");
+        background-size: cover;
+        background-position: bottom center;
+        background-repeat: no-repeat;
+    }
+    .trade-noso {
+        background-image: url("../img/trade.png");
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+    .noso-community {
+        background-image: url(../img/community-blur.png);
+        background-size: 150%;
+        background-position: bottom center;
+        background-repeat: no-repeat;
+    }
+    .noso-roadmap {
+        background-image: url("../img/about-blurry.png");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    .faq {
+        background-image: url(../img/faq-blurry.png);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    .get-startnoso {
+        background-image: url(../img/getting-start.png);
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+    h2 {
+        font-size: 28px;
+    }
+    h5, .h5 {
+        font-size: 14px;
+    }
+    h4, .h4 {
+        font-size: 18px;
+    }
+    h5, .h5 {
+        font-size: 12px;
+    }
+    body{
+        font-size: 12px;
+        line-height: 20px;
+    }
+    .about-left {
+        margin-bottom: 50px;
+    }
+    .px-2 {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .bodyFontRegular-16, .faq-container .faq-body {
+        font-size: 12px;
+        line-height: 150%;
+        padding-top: 5px;
+    }
+    .about-right-noso img{
+        width: 40px;
+    }
+    .pl-2 {
+        padding-left: 10px;
+    }
+    .col-4 {
+        flex-basis: 100%;
+        margin-bottom: 30px;
+    }
+    .col-sm-4{
+        flex-basis: 33.32%;
+    }
+    .col-sm-6{
+        flex-basis: 50% !important;
+    }
+    .col-8 {
+        flex-basis: 100%;
+    }
+    .roadmap {
+        padding-top: 0px;
+        width: 100%;
+        position: relative;
+        margin: 0 auto;
+    }
+    .roadmap .left .position, .roadmap .right .position {
+        position: absolute;
+        left: -19%;
+        top: 0;
+        z-index: 1;
+        width: 38px;
+    }
+    .roadmap .left, .roadmap .right{
+        margin: 35px auto;
+    }
+    .roadmap .left::before, .roadmap .right::before{
+        content: "";
+        position: absolute;
+        left: -50px;
+        top: 6px;
+        border-width: 15px 25px;
+        border-color: transparent #F8C339 transparent transparent;
+        display: inline-block;
+        border-style: solid;
+    }
+    .roadmap .right::after{
+        display: none;
+    }
+    .roadmap .left, .roadmap .right {
+        margin-left: auto !important;
+        margin-right: 0;
+    }
+    .roadmap .left, .roadmap .right {
+        width: 85%;
+        position: relative;
+        margin-bottom: 50px;
+        text-align: left;
+    }
+    .roadmap::after, .faq-container .roadmap.faq-page.active::after {
+        content: "";
+        width: 5px;
+        height: 100%;
+        background-color: #F8C339;
+        display: block;
+        position: absolute;
+        left: 15px;
+        border-radius: 20px;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .roadmap .right .d-flex {
+        justify-content: flex-start;
+    }
+    .faq-container .faq-page {
+        display: flex;
+        cursor: pointer;
+        justify-content: space-between;
+        margin: 10px 0;
+        align-items: center;
+    }
+    .get-startnoso .top-part p {
+        width: 100%;
+        margin: 0 auto;
+    }
+    .col-3 {
+        flex-basis: 50%;
+        margin-bottom: 30px;
+    }
+    .main-footer .top-part .item {
+        width: 230px;
+        margin-bottom: 30px;
+    }
+    .main-footer .footer-menu a {
+        display: inline-block;
+        margin-right: 15px;
+        color: #D3E0ED;
+        font-weight: 500;
+    }
+    .main-footer p {
+        margin: 30px 0;
+        font-size: 12px;
+        color: #8C9CAC;
+    }
+    .main-footer .social-icon li {
+        display: inline-block;
+        margin-right: 10px;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        background-color: #505C68;
+        text-align: center;
+        color: #F2F6FA;
+        font-size: 18px;
+        border-radius: 50px;
+    }
+    .only-mb-5{
+        margin-bottom: 50px !important;
+        padding-bottom: 0 !important;
+    }
+    .position-relative{
+        position: relative;
+    }
+    .nav-right {
+        position: absolute;
+        left: 0;
+        top: 76px;
+        width: 100%;
+        background-color: rgb(44, 62, 80);
+        padding: 20px;
+    }
+    .nav-menus {
+        display: flex;
+        flex-direction: column;
+        gap: 13px;
+    }
+    .main-header .nav-right .button-sm {
+        margin-left: 0;
+        margin-top: 20px;
+    }
+}
+
+/* // Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .container{
+        max-width: 730px;
+        margin: 0 auto;
+    }
+    .position-relative{
+        position: relative;
+    }
+    .nav-right {
+        display: none;
+    }
+    .nav-right {
+        position: absolute;
+        left: 0;
+        top: 76px;
+        width: 100%;
+        background-color: rgb(44, 62, 80);
+        padding: 20px;
+    }
+    .nav-menus {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .toggle-bar{
+        display: block;
+        font-size: 35px;
+    }
+    .main-header .nav-right .button-sm {
+        margin-left: 0;
+        margin-top: 15px;
+    }
+    h1 {
+        font-size: 52px;
+    }
+    .none{
+        display: none;
+    }
+    .hero-area p {
+        font-size: 22px;
+        color: #E3ECF4;
+        font-weight: 500;
+    }
+    h2 {
+        font-size: 42px;
+    }
+    .col-md-fluid{
+        flex-basis: 100%;
+    }
+    .px-2 {
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+    .block-md{
+        display: block;
+    }
+    .py-2 {
+        padding-top: 13px;
+        padding-bottom: 13px;
+    }
+    .pl-2 {
+        padding-left: 13px;
+    }
+    h4, .h4 {
+        font-size: 18px;
+    }
+    .bodyFontRegular-16, .faq-container .faq-body {
+        font-size: 13px;
+        line-height: 150%;
+    }
+    h5, .h5 {
+        font-size: 14px;
+    }
+    .bodyFontRegular-14 {
+        font-size: 12px;
+        line-height: 150%;
+    }
+    .noso-roadmap {
+        background-image: url(../img/roadmap.png);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    .get-startnoso .top-part p {
+        width: 60%;
+        margin: 0 auto;
+    }
+    .button-lg {
+        padding: 15px 25px;
+        border-radius: 10px;
+    }
+    .main-header {
+        background-image: url("../img/Header.png");
+        background-repeat: no-repeat;
+        height: 800px;
+        background-size: cover;
+    }
+    .header-bottom {
+        background-image: url("../img/header-top.png");
+        padding: 100px 0;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+    .py-200 {
+        padding: 100px 0;
+    }
+    .about-noso {
+        background-image: url("../img/about-blurry.png");
+        background-size: cover;
+        background-position: top right;
+        background-repeat: no-repeat;
+    }
+    .feature {
+        background-image: url("../img/feature-blurry.png");
+        background-size: cover;
+        background-position: 78% 133px;
+        background-repeat: no-repeat;
+    }
+    .trade-noso {
+        background-image: url("../img/trade.png");
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+    .noso-community {
+        background-image: url(../img/community-blur.png);
+        background-size: 70%;
+        background-position: 125% 79%;
+        background-repeat: no-repeat;
+    }
+    .faq {
+        background-image: url(../img/faq-blurry.png);
+        background-size: cover;
+        background-position: left;
+        background-repeat: no-repeat;
+    }
+    .get-startnoso {
+        background-image: url(../img/getting-start.png);
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+
+}
+
+/* // Large devices (desktops, 992px and up) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .container{
+        max-width: 950px;
+    }
+    .header-bottom {
+        background-image: url("../img/top-1.png"), url("../img/header-top.png");
+        padding: 120px 0;
+        background-repeat: no-repeat;
+        background-size: 72%, 90%;
+        background-position: 398px 137px, 378px;
+    }
+    .py-200 {
+        padding: 120px 0;
+    }
+    .button-lg {
+        padding: 15px 30px;
+        border-radius: 10px;
+    }
+    h5, .h5 {
+        font-size: 14px;
+    }
+    body {
+        font-family: "Roboto", Sans-serif;
+        color: #fff;
+        font-size: 14px;
+    }
+    .py-2 {
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
+    .px-2 {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    .pl-2 {
+        padding-left: 15px;
+    }
+    h4, .h4 {
+        font-size: 18px;
+    }
+    .bodyFontRegular-16, .faq-container .faq-body {
+        font-size: 16px;
+        line-height: 150%;
+        padding-top: 5px;
+    }
+    .about-noso {
+        background-image: url("../img/about-blurry.png");
+        background-size: 90%;
+        background-position: right;
+        background-repeat: no-repeat;
+    }
+    .feature {
+        background-image: url("../img/feature-blurry.png");
+        background-size: 69%;
+        background-position: 92% 213px;
+        background-repeat: no-repeat;
+    }
+    .trade-noso {
+        background-image: url("../img/trade.png");
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+    .noso-community {
+        background-image: url(../img/community-blur.png);
+        background-size: 60%;
+        background-position: 105% 76%;
+        background-repeat: no-repeat;
+    }
+    .bodyFontRegular-14 {
+        font-size: 13px;
+        line-height: 150%;
+    }
+    .noso-roadmap {
+        background-image: url(../img/roadmap.png);
+        background-size: 125%;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    .faq {
+        background-image: url(../img/faq-blurry.png);
+        background-size: cover;
+        background-position: -212px;
+        background-repeat: no-repeat;
+    }
+    .get-startnoso {
+        background-image: url(../img/getting-start.png);
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+    .header-bottom {
+        background-image: url("../img/top-1.png"), url("../img/header-top.png");
+        padding: 200px 0;
+        background-repeat: no-repeat;
+        background-size: 70%, 90%;
+        background-position: 482px 93px, 426px;
+    }
+}
+
+/* // Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) and (max-width: 1350px) {
+    .feature {
+        background-image: url("../img/feature-blurry.png");
+        background-size: 60%;
+        background-position: 86% 230px;
+        background-repeat: no-repeat;
+    }
+    .noso-community {
+        background-image: url(../img/community-blur.png);
+        background-size: 51%;
+        background-position: 96% 69%;
+        background-repeat: no-repeat;
+    }
+    .noso-roadmap {
+        background-image: url(../img/roadmap.png);
+        background-size: 114%;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    .header-bottom {
+        background-image: url("../img/top-1.png"), url("../img/header-top.png");
+        padding: 200px 0;
+        background-repeat: no-repeat;
+        background-size: 70%, 80%;
+        background-position: 125% 50px, 180%;
+    }
+}
+@media (min-width: 1200px) and (max-width: 1600px){
+    .header-bottom {
+        background-image: url("../img/top-1.png"), url("../img/header-top.png");
+        padding: 200px 0;
+        background-repeat: no-repeat;
+        background-size: 60%, 80%;
+        background-position: 97% 52px, 167%;
+    }
+}
