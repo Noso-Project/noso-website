@@ -47,57 +47,57 @@
         padding: 70px 0;
     }
     .main-header {
-        background-image: url("../img/Header.png");
+        background-image: url("../img/Header.webp");
         background-repeat: no-repeat;
         height: 700px;
         background-size: cover;
         position: relative;
     }
     .header-bottom {
-        background-image: url("../img/header-top.png");
+        background-image: url("../img/header-top.webp");
         padding: 50px 0;
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
     }
     .about-noso {
-        background-image: url("../img/about-blurry.png");
+        background-image: url("../img/about-blurry.webp");
         background-size: cover;
         background-position: bottom center;
         background-repeat: no-repeat;
     }
     .feature {
-        background-image: url("../img/feature-blurry.png");
+        background-image: url("../img/feature-blurry.webp");
         background-size: cover;
         background-position: bottom center;
         background-repeat: no-repeat;
     }
     .trade-noso {
-        background-image: url("../img/trade.png");
+        background-image: url("../img/trade.webp");
         background-size: cover;
         background-position: center center;
         background-repeat: no-repeat;
     }
     .noso-community {
-        background-image: url(../img/community-blur.png);
+        background-image: url("../img/community-blur.webp");
         background-size: 150%;
         background-position: bottom center;
         background-repeat: no-repeat;
     }
     .noso-roadmap {
-        background-image: url("../img/about-blurry.png");
+        background-image: url("../img/about-blurry.webp");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
     }
     .faq {
-        background-image: url(../img/faq-blurry.png);
+        background-image: url("../img/faq-blurry.webp");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
     }
     .get-startnoso {
-        background-image: url(../img/getting-start.png);
+        background-image: url("../img/getting-start.webp");
         background-size: cover;
         background-position: center center;
         background-repeat: no-repeat;
@@ -340,56 +340,56 @@
         padding: 70px 0;
     }
     .main-header {
-        background-image: url("../img/Header.png");
+        background-image: url("../img/Header.webp");
         background-repeat: no-repeat;
         height: 800px;
         background-size: cover;
     }
     .header-bottom {
-        background-image: url("../img/header-top.png");
+        background-image: url("../img/header-top.webp");
         padding: 50px 0;
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
     }
     .about-noso {
-        background-image: url("../img/about-blurry.png");
+        background-image: url("../img/about-blurry.webp");
         background-size: cover;
         background-position: bottom center;
         background-repeat: no-repeat;
     }
     .feature {
-        background-image: url("../img/feature-blurry.png");
+        background-image: url("../img/feature-blurry.webp");
         background-size: cover;
         background-position: bottom center;
         background-repeat: no-repeat;
     }
     .trade-noso {
-        background-image: url("../img/trade.png");
+        background-image: url("../img/trade.webp");
         background-size: cover;
         background-position: center center;
         background-repeat: no-repeat;
     }
     .noso-community {
-        background-image: url(../img/community-blur.png);
+        background-image: url("../img/community-blur.webp");
         background-size: 150%;
         background-position: bottom center;
         background-repeat: no-repeat;
     }
     .noso-roadmap {
-        background-image: url("../img/about-blurry.png");
+        background-image: url("../img/about-blurry.webp");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
     }
     .faq {
-        background-image: url(../img/faq-blurry.png);
+        background-image: url("../img/faq-blurry.webp");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
     }
     .get-startnoso {
-        background-image: url(../img/getting-start.png);
+        background-image: url("../img/getting-start.webp");
         background-size: cover;
         background-position: center center;
         background-repeat: no-repeat;
@@ -642,7 +642,7 @@
         line-height: 150%;
     }
     .noso-roadmap {
-        background-image: url(../img/roadmap.png);
+        background-image: url("../img/roadmap.webp");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
@@ -656,13 +656,13 @@
         border-radius: 10px;
     }
     .main-header {
-        background-image: url("../img/Header.png");
+        background-image: url("../img/Header.webp");
         background-repeat: no-repeat;
         height: 800px;
         background-size: cover;
     }
     .header-bottom {
-        background-image: url("../img/header-top.png");
+        background-image: url("../img/header-top.webp");
         padding: 100px 0;
         background-repeat: no-repeat;
         background-size: cover;
@@ -672,37 +672,37 @@
         padding: 100px 0;
     }
     .about-noso {
-        background-image: url("../img/about-blurry.png");
+        background-image: url("../img/about-blurry.webp");
         background-size: cover;
         background-position: top right;
         background-repeat: no-repeat;
     }
     .feature {
-        background-image: url("../img/feature-blurry.png");
+        background-image: url("../img/feature-blurry.webp");
         background-size: cover;
         background-position: 78% 133px;
         background-repeat: no-repeat;
     }
     .trade-noso {
-        background-image: url("../img/trade.png");
+        background-image: url("../img/trade.webp");
         background-size: cover;
         background-position: center center;
         background-repeat: no-repeat;
     }
     .noso-community {
-        background-image: url(../img/community-blur.png);
+        background-image: url("../img/community-blur.webp");
         background-size: 70%;
         background-position: 125% 79%;
         background-repeat: no-repeat;
     }
     .faq {
-        background-image: url(../img/faq-blurry.png);
+        background-image: url("../img/faq-blurry.webp");
         background-size: cover;
         background-position: left;
         background-repeat: no-repeat;
     }
     .get-startnoso {
-        background-image: url(../img/getting-start.png);
+        background-image: url("../img/getting-start.webp");
         background-size: cover;
         background-position: center center;
         background-repeat: no-repeat;
@@ -716,7 +716,7 @@
         max-width: 950px;
     }
     .header-bottom {
-        background-image: url("../img/top-1.png"), url("../img/header-top.png");
+        background-image: url("../img/top-1.webp"), url("../img/header-top.webp");
         padding: 120px 0;
         background-repeat: no-repeat;
         background-size: 72%, 90%;
@@ -757,25 +757,25 @@
         padding-top: 5px;
     }
     .about-noso {
-        background-image: url("../img/about-blurry.png");
+        background-image: url("../img/about-blurry.webp");
         background-size: 90%;
         background-position: right;
         background-repeat: no-repeat;
     }
     .feature {
-        background-image: url("../img/feature-blurry.png");
+        background-image: url("../img/feature-blurry.webp");
         background-size: 69%;
         background-position: 92% 213px;
         background-repeat: no-repeat;
     }
     .trade-noso {
-        background-image: url("../img/trade.png");
+        background-image: url("../img/trade.webp");
         background-size: cover;
         background-position: center center;
         background-repeat: no-repeat;
     }
     .noso-community {
-        background-image: url(../img/community-blur.png);
+        background-image: url("../img/community-blur.webp");
         background-size: 60%;
         background-position: 105% 76%;
         background-repeat: no-repeat;
@@ -785,25 +785,25 @@
         line-height: 150%;
     }
     .noso-roadmap {
-        background-image: url(../img/roadmap.png);
+        background-image: url("../img/roadmap.webp");
         background-size: 125%;
         background-position: center;
         background-repeat: no-repeat;
     }
     .faq {
-        background-image: url(../img/faq-blurry.png);
+        background-image: url("../img/faq-blurry.webp");
         background-size: cover;
         background-position: -212px;
         background-repeat: no-repeat;
     }
     .get-startnoso {
-        background-image: url(../img/getting-start.png);
+        background-image: url("../img/getting-start.webp");
         background-size: cover;
         background-position: center center;
         background-repeat: no-repeat;
     }
     .header-bottom {
-        background-image: url("../img/top-1.png"), url("../img/header-top.png");
+        background-image: url("../img/top-1.webp"), url("../img/header-top.webp");
         padding: 200px 0;
         background-repeat: no-repeat;
         background-size: 70%, 90%;
@@ -814,25 +814,25 @@
 /* // Extra large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) and (max-width: 1350px) {
     .feature {
-        background-image: url("../img/feature-blurry.png");
+        background-image: url("../img/feature-blurry.webp");
         background-size: 60%;
         background-position: 86% 230px;
         background-repeat: no-repeat;
     }
     .noso-community {
-        background-image: url(../img/community-blur.png);
+        background-image: url("../img/community-blur.webp");
         background-size: 51%;
         background-position: 96% 69%;
         background-repeat: no-repeat;
     }
     .noso-roadmap {
-        background-image: url(../img/roadmap.png);
+        background-image: url("../img/roadmap.webp");
         background-size: 114%;
         background-position: center;
         background-repeat: no-repeat;
     }
     .header-bottom {
-        background-image: url("../img/top-1.png"), url("../img/header-top.png");
+        background-image: url("../img/top-1.webp"), url("../img/header-top.webp");
         padding: 200px 0;
         background-repeat: no-repeat;
         background-size: 70%, 80%;
@@ -841,7 +841,7 @@
 }
 @media (min-width: 1200px) and (max-width: 1600px){
     .header-bottom {
-        background-image: url("../img/top-1.png"), url("../img/header-top.png");
+        background-image: url("../img/top-1.webp"), url("../img/header-top.webp");
         padding: 200px 0;
         background-repeat: no-repeat;
         background-size: 60%, 80%;
