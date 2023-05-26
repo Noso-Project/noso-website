@@ -3,11 +3,11 @@ $('.owl-carousel').owlCarousel({
     margin:16,
     nav:false,
     autoplay:true,
-    autoplayTimeout:2500,
+    autoplayTimeout:2100,
     autoplayHoverPause:true,
     animateOut:'slideOutDown',
     animateIn:'flipInX',
-    smartSpeed:600,
+    smartSpeed:900,
     responsive:{
         0:{
             items:2
