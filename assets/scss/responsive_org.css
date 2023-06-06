@@ -49,6 +49,7 @@
     .main-header {
         background-image: url("../img/Header.webp");
         background-repeat: no-repeat;
+        height: 700px;
         background-size: cover;
         position: relative;
     }
@@ -341,6 +342,7 @@
     .main-header {
         background-image: url("../img/Header.webp");
         background-repeat: no-repeat;
+        height: 800px;
         background-size: cover;
     }
     .header-bottom {
@@ -656,6 +658,7 @@
     .main-header {
         background-image: url("../img/Header.webp");
         background-repeat: no-repeat;
+        height: 800px;
         background-size: cover;
     }
     .header-bottom {
