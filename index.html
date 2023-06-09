@@ -174,6 +174,31 @@ blockchains.</p>
 <div class="col-4 col-sm-6">
 <ul class="featured-list">
 <li class="list-item">
+<p class="h5 m-0">Circulating Supply</p>
+<p class="neutral-500"><span id="circulatingsupply" total="0">0</span> Noso</p>
+</li>
+<li class="list-item">
+<p class="h5 m-0">Current Block Height</p>
+<p class="neutral-500"><span id="blockheight" total="0">0</span></p>
+</li>
+<li class="list-item">
+<p class="h5 m-0">TXs per second</p>
+<p class="neutral-500">&gt; 1900</p>
+</li>
+<li class="list-item">
+<p class="h5 m-0">Left to distribute</p>
+<p class="neutral-500"><span id="undistributedsupply" total="0">0</span> Noso</p>
+</li>
+<li class="list-item">
+<p class="h5 m-0">Pending TXS</p>
+<p class="neutral-500"><span id="pendingtx" total="0">0</span></p>
+</li>
+</ul>
+</div>
+<div class="col-4 none block-md"> <img src="assets/img/logo.svg" class="fluid" alt="Noso Coin"></div>
+<div class="col-4 col-sm-6">
+<ul class="featured-list">
+<li class="list-item">
 <p class="h5 m-0">Genesys Block</p>
 <p class="neutral-500">March 7th, 2021</p>
 </li>
@@ -182,29 +207,12 @@ blockchains.</p>
 <p class="neutral-500">21 000 000 Noso</p>
 </li>
 <li class="list-item">
-<p class="h5 m-0">Circulating Supply</p>
-<p class="neutral-500">~5 500 000 Noso</p>
-</li>
-<li class="list-item">
-<p class="h5 m-0">Pre-mine</p>
-<p class="neutral-500">0.049% (10303.9073 Noso)</p>
-</li>
-</ul>
-</div>
-<div class="col-4 none block-md"> <img src="assets/img/logo.svg" class="fluid" alt> </div>
-<div class="col-4 col-sm-6">
-<ul class="featured-list">
-<li class="list-item">
 <p class="h5 m-0">Block time</p>
 <p class="neutral-500">600 seconds</p>
 </li>
 <li class="list-item">
 <p class="h5 m-0">TX verification time</p>
 <p class="neutral-500">&lt; 3 seconds</p>
-</li>
-<li class="list-item">
-<p class="h5 m-0">TXs per second</p>
-<p class="neutral-500">&gt; 1900</p>
 </li>
 <li class="list-item">
 <p class="h5 m-0">Ticker</p>
@@ -426,5 +434,10 @@ Started</a> <a target="_blank" href="https://explorer.nosocoin.com/index.html">E
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 <script src="assets/js/plugins.js"></script>
 <script src="assets/js/main.js"></script>
+<script type="text/javascript">
+function nWS(val){var integerValue=parseInt(val);return integerValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g," ");}
+function lvcnt(type){$.get('https://cdnplus.de/preloader/noso/?get='+type+'&nocache='+Date.now(),function(data){if(data){$({countNum:$('#'+type).attr('total')}).animate({countNum:data},{duration:3500,easing:'swing',step:function(now){var rounded=Math.ceil(now);$('#'+type).attr('total',rounded);$('#'+type).text(nWS(rounded.toFixed(0)));}});}setTimeout(lvcnt,15000,type);})}
+lvcnt('blockheight');lvcnt('circulatingsupply');lvcnt('undistributedsupply');lvcnt('pendingtx');
+</script>
 </body>
 </html>
