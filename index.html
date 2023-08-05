@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 <head>
@@ -16,7 +17,6 @@
 <!--[if IE]>
   <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>  <![endif]-->
 <header class="main-header" id="home">
-
 <nav class="navbar">
 <div class="container">
 <div class="d-flex flex-wrap align-items-center justify-content-between position-relative">
@@ -37,7 +37,7 @@
 </div>
 </div>
 </nav>
-<div class="video-container"><video playsinline autoplay muted loop style="width:100%;height:100vh;z-index:0;opacity:.88"><source src="assets/files/bg.mp4" type="video/mp4"></video></div>
+<div class="video-container"><video playsinline autoplay muted loop style="width:100%;height:100vh;z-index:0"><source src="assets/files/bg.mp4" type="video/mp4"></video></div>
 <div class="hero-area" data-aos="zoom-in" data-aos-anchor-placement="top-bottom" data-aos-delay="1000">
 <div class="container">
 <div style="opacity:0"><small class="top_title uppercase">indefinitely scalable cryptocurrency</small>
@@ -47,7 +47,6 @@
 </div>
 </div>
 </header>
-
 <section class="header-bottom py-200">
 <div class="container">
 <div class="row">
@@ -110,7 +109,6 @@ blockchains.</p>
 </div>
 </div>
 </section>
-
 <section class="about-noso py-200" id="about">
 <div class="container">
 <div class="top-part text-center mb-5">
@@ -156,7 +154,6 @@ blockchains.</p>
 </div>
 </div>
 </section>
-
 <section class="feature py-200" id="feature">
 <div class="container">
 <div class="text-center mb-5 pb-5 only-mb-5">
@@ -225,7 +222,6 @@ blockchains.</p>
 </div>
 </div>
 </section>
-
 <section class="trade-noso py-200">
 <div class="container text-center">
 <h2 class="font-regular after-hr after-center pb-5 mb-5 only-mb-5" data-aos="flip-up" data-aos-duration="1000">PLATFORMS SUPPORT <strong>NOSO</strong></h2>
@@ -235,6 +231,7 @@ blockchains.</p>
 <div class="item"><a target="_blank" href="https://www.sevenseas.exchange/market/NOSO-USDT"><img src="assets/img/logo1.png" alt="SevenSeas" border="0"></a></div>
 <div class="item"><a target="_blank" href="https://www.txbit.io"><img src="assets/img/logo2.png" alt="txBit" border="0"></a></div>
 <div class="item"><a target="_blank" href="https://nonkyc.io/asset/NOSO"><img src="assets/img/logo4.png" alt="nonkyc" border="0"></a></div>
+<div class="item"><a target="_blank" href="https://xeggex.com/market/NOSO_USDT"><img src="assets/img/logo13.png" alt="XeggeX" border="0"></a></div>
 </div>
 <br /><h2 class="font-regular"><strong>TRACK</strong> NOSO.</h2>
 <div class="d-flex flex-wrap align-items-center justify-content-center owl-carousel owl-theme">
@@ -250,7 +247,6 @@ blockchains.</p>
 </div>
 </div>
 </section>
-
 <section class="noso-community py-200">
 <div class="container">
 <div class="text-center mb-5">
@@ -264,7 +260,6 @@ blockchains.</p>
 </div>
 </div>
 </section>
-
 <section class="noso-roadmap py-200" id="roadmap">
 <div class="container">
 <div class="text-center mb-5" data-aos="flip-up" data-aos-duration="1000">
@@ -307,7 +302,6 @@ Monetization: First Noso Exchange. Listing -&gt; TXBIT.<br>Noso library sets: Al
 </div>
 </div>
 </section>
-
 <section class="faq py-200" id="faq">
 <div class="container">
 <div class="text-center mb-5 pb-5 only-mb-5">
@@ -372,7 +366,6 @@ ASKED QUESTIONS</h2>
 </div>
 </div>
 </section>
-
 <section class="get-startnoso py-200" id="download">
 <div class="container">
 <div class="top-part text-center pb-5 mb-5" data-aos="flip-up" data-aos-duration="1000">
@@ -403,7 +396,6 @@ by visiting <a href="https://docs.nosocoin.com" class="primary-900 font-mediam" 
 </div>
 </div>
 </section>
-
 <footer class="main-footer">
 <div class="top-part d-flex align-items-start flex-wrap justify-content-center">
 <div class="item text-center"> <span><i class="fa-solid fa-paper-plane"></i></span>
@@ -434,10 +426,8 @@ Started</a> <a target="_blank" href="https://explorer.nosocoin.com/index.html">E
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 <script src="assets/js/plugins.js"></script>
 <script src="assets/js/main.js"></script>
-<script type="text/javascript">
-function nWS(val){var integerValue=parseInt(val);return integerValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g," ");}
+<script type="text/javascript">function nWS(val){var integerValue=parseInt(val);return integerValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g," ");}
 function lvcnt(type){$.get('https://cdnplus.de/preloader/noso/?get='+type+'&nocache='+Date.now(),function(data){if(data){$({countNum:$('#'+type).attr('total')}).animate({countNum:data},{duration:3500,easing:'swing',step:function(now){var rounded=Math.ceil(now);$('#'+type).attr('total',rounded);$('#'+type).text(nWS(rounded.toFixed(0)));}});}setTimeout(lvcnt,15000,type);})}
-lvcnt('blockheight');lvcnt('circulatingsupply');lvcnt('undistributedsupply');lvcnt('pendingtx');
-</script>
+lvcnt('blockheight');lvcnt('circulatingsupply');lvcnt('undistributedsupply');lvcnt('pendingtx');</script>
 </body>
 </html>
