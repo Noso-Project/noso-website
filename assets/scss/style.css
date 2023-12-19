@@ -29,6 +29,12 @@ hr {
   padding: 0;
 }
 
+.chr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #F8C339, transparent);
+}
+
 audio,
 canvas,
 iframe,
@@ -810,6 +816,9 @@ a .icon {
   width: 300px;
   position: relative;
   margin-bottom: 60px;
+  background-color: rgba(255,255,255,0.05);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 8px rgba(0,0,0,.2);
 }
 .roadmap .left .position {
   position: absolute;
